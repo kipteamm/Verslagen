@@ -1,0 +1,116 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-15">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Torben Petre&#769; - CA_PROJECT_1</title>
+    <style type="text/css">
+        * {box-sizing: border-box;}
+        body {font-size:18px;padding:25px;max-width:800px;margin:0 auto;}
+        h1 {margin-top: 25vh;}
+        u {text-decoration: overline;}
+        img {padding:12.5px;max-width: 100%;max-height:80vh;}
+    </style>
+</head>
+<body>
+    <h1>Verslag</h1>
+    <p>
+        <b>Titel:</b> <i>Project 1: CA_PROJECT_1</i>
+    </p>
+    <p>
+        Dit verslag werd opgesteld door:
+    </p>
+    <ul>
+        <li>
+            <b>Naam:</b> <i>Etienne El Hachem</i><br>
+            <b>Studentennummer:</b> <i>20241443</i><br>
+            <b>Email adres:</b> <i>etienne.elhachem@student.uantwerpen.be</i>
+        </li>
+        <li>
+            <b>Naam:</b> <i>Torben Petre&#769;</i><br>
+            <b>Studentennummer:</b> <i>20241699</i><br>
+            <b>Email adres:</b> <i>torben.petre@student.uantwerpen.be</i>
+        </li>
+    </ul>
+    <b>Aantal man-uren besteed:</b> <i>x uur</i><br>
+    <b>Moeilijkheidsgraad:</b> <i>xx</i> /10 (1 is heel makkelijk, 10 is heel moeilijk)<p></p>
+
+    <h2>Inhoud van de oplossing</h2>
+    <p>
+        De oplossing bestaat uit de volgende bestanden (geef alle bestanden op):
+    </p>
+    <ul>
+        <li>
+            <a href="waarheidstabellen_de_morgan.xlsx" target="_blank">waarheidstabellen_de_morgan.xlsx</a>: waarheidstabellen De Morgan
+        </li>
+        <li>
+            <a href="nand_gates.circ" target="_blank">nand_gates.circ</a>: Logisim bestand met NAND gates.
+        </li>
+        <li>
+            <a href="7_segment_display.circ" target="_blank">7_segment_display.circ</a>: Logisim bestand met 7 segment display.
+        </li>
+    </ul>
+
+    <h2>De Morgan</h2>
+    <p>
+        Om de twee theorie&euml;n van De Morgan te bewijzen met een waarheidstabel <i>truthtabel</i> zullen we ze individueel bekijken. Allereerst, <u>A+B</u> = <u>A</u> &#8226; <u>B</u>.
+        Bijgevoegd vind u de waarheidstabellen voor zowel het linker als het rechter lid.
+    </p>
+    <img src="demorgan1.png" alt="De Morgan theorie 1."/>
+    <p>
+        <b>R</b> is telkens het resultaat wanneer je de OR (+) of AND (&#8226;) bewerkingen toe past. Zoals u kunt zien zijn deze voor beide leden hetzelfde. Daaruit mag u concluderen dat de beide leden ook aan elkaaar gelijk zijn.
+    </p>
+    <p>
+        Voor de tweede theorie van De Morgan, <u>A &#8226; B</u> = <u>A</u> + <u>B</u>, maken we gebruik van een gelijkaardige werkmethode. We stellen de waarheidstabellen van beide leden op.
+    </p>
+    <img src="demorgan2.png" alt="De Morgan theorie 2"/>
+    <p>
+        Opnieuw is <b>R</b> het resultaat wanneer u de booleaanse bewerkingen toepast. R is voor beide tabellen gelijk, waaruit we kunnen concluderen dat ook hier de beide leden gelijk zijn elkaar.
+    </p>
+    
+    <h2>Bewijs voor booleaanse vergelijking</h2>
+
+    <h2>NAND gates</h2>
+    <div style="text-align:center;">
+        <img src="nand_gates.png" alt="NAND gates"/>
+    </div>
+
+    <h2>Implement truth table</h2>
+    <div style="text-align:center;">
+        <img src="opdracht_4.png" alt="Opdracht 4"/>
+        <img src="truthtable_4.png" alt="Waarheidstabel 4"/>
+    </div>
+
+    <h2>7-segment display</h2>
+    <p>
+        Om elk binair cijfer dat we opgeven weer te geven, moeten we een specifieke waarheidstabel opstellen.
+        Deze waarheidstabel neemt een 3-bit binairgetal als invoer en heeft voor elk van de zeven segmenten een output met een waarde van 1 of 0 (true of false).
+        De tabel beschrijft voor elk binair getal of een segment moet worden opgelicht of niet. Dit wordt gedaan door een waarde van 1 of true op te geven.
+        Als een segment niet moet worden opgelicht om een getal weer te geven, bevat de tabel een 0 (of false). Deze tabel ziet er zo uit:
+    </p>
+    <img src="7segmenttruthtable.png" alt="7 segment display truth table"/>
+    <p>
+        Vervolgens kun je voor elk segment [T-Z] een <i>sum of products</i> opstellen. 
+        Dit kan je zien als een reeks voorwaarden die niet allemaal waar moeten zijn, maar wanneer er e&#769;e&#769;n waar is, het segment wel aan zal springen.
+    </p>
+    <ul>
+        <li>
+            <b>T:</b> (<u>A</u> &bull; <u>B</u> &bull; <u>C</u>) + (<u>A</u> &bull; B &bull; <u>C</u>) + (<u>A</u> &bull; B &bull; C) + (A &bull; <u>B</u> &bull; C) + (A &bull; B &bull; <u>C</u>) + (A &bull; B &bull; C)
+        </li>
+        <li>
+            <b>U:</b> (<u>A</u> &bull; <u>B</u> &bull; <u>C</u>) + (<u>A</u> &bull; <u>B</u> &bull; C) + (<u>A</u> &bull; B &bull; <u>C</u>) + (<u>A</u> &bull; B &bull; C) + (A &bull; <u>B</u> &bull; <u>C</u>) + + (A &bull; B &bull; C)
+        </li>
+        <li>
+            ... de rest moet nog (das veel werk)
+        </li>
+    </ul>
+    <p>
+        Dit kunnen we eerst nog versimpelen voordat we ... AND gates en ... OR gates in logisim toevoegen. 
+        We kunnen al deze formules abstraheren tot 8 verschillende AND gates (voor elk mogelijk binair getal), en 7 OR gates (voor elk segment).
+        Verder kun je ook nog het aantal NOT gates minimaliseren door voor elke input, ook een inverse lijn te trekken.
+    </p>
+    <div style="text-align:center;">
+        <img src="7segmentdisplay.png" alt="7 Segment display in Logisim"/>
+    </div>
+</body>
+</html>
