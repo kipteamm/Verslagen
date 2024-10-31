@@ -51,7 +51,8 @@
 
     <h2>1-bit full adder</h2>
     <p>
-        Ongeoptimaliseerd
+        Ongeoptimaliseerd <br><br>
+        a. Determine the inputs and outputs of a 1-bit full adder and build a truth table.
     </p>
 
     <div style="text-align:center;">
@@ -59,7 +60,9 @@
     </div>
     
     <p>
-        Geoptimaliseerd
+        Geoptimaliseerd <br><br>
+        b. Convert the truth table to Boolean algebra, and optimize the Boolean expression. <br>
+        c. Implement the Boolean expression as a circuit called “1-Bit Adder” in Logisim.
     </p>
 
     <div style="text-align:center;">
@@ -68,8 +71,55 @@
 
     <h2>12-bit two’s complement ripple carry adder</h2>
 
+    <p>
+        a. Create a new circuit in the same logisim file where you created your 1-bit adder. You
+        can do this by choosing from the menu ‘Project’ - ‘Add Circuit’. You can then choose
+        which circuit you want to edit by double clicking it in the library menu on the left
+        side. You can use a self made circuit as a building block in another circuit, in the
+        same way as you use other blocks/gates in your circuit. The interface of your block
+        is determined by the input and output ports you created in its circuit. <br>
+        b. Use 1-bit adders to create a 12-bit adder, that adds two 12-bit wide inputs. <br>
+        c. Think about a way how overflow can be determined from carry outs. Overflow hap-
+        pens for example in these cases: 2047 + 1 = -2048 or -2048 + (-1) = 2047. Add an
+        output bit denoting overflow to the circuit containing your 12-bit two’s complement
+        adder.
+    </p>
+
     <div style="text-align:center;">
         <img src="12_bit_ripple_carry_adder.png" alt="12 bit ripple carry adder"/>
+    </div>
+
+    <h2>12-bit two's complement carry lookahead adder</h2>
+    <p>
+        a. Build a circuit for a 4-bit adder block. This block has inputs carryIn, a0, a1, a2, a3,
+        b0, b1, b2, b3 and outputs s0, s1, s2, s3, P0, G0. Note that there is no output for
+        carryOut, as a carry lookahead adder doesn’t use ci−1. <br>
+        b. Optimise this 4-bit adder block to decrease the circuit latency (maximum number of
+        ports traversed). Do this by expressing your block as a set of Boolean equations (for
+        every output pin, in terms of input pins), and using Boolean algebra or a truth table
+        to optimise these equations. What is always the maximum latency for combinatorial
+        circuits? Build your optimised 4-bit adder block.
+    </p>
+
+    <div style="text-align:center;">
+        <img src="4_bit_carry_lookahead_adder.png" alt="4 bit carry lookahead adder"/>
+    </div>
+
+    <p>
+        c. Build a circuit of a 12-bit two’s complement carry lookahead adder by creating a
+“carry lookahead unit” that uses three of your own 4-bit adder blocks.
+    </p>
+
+    <div style="text-align:center;">
+        <img src="carry_lookahead_unit.png" alt="Carry lookahead unit"/>
+    </div>
+
+    <p>
+        d. On this 12-bit adder circuit, create an extra output bit, denoting overflow.
+    </p>
+
+    <div style="text-align:center;">
+        <img src="12_bit_carry_lookahead.png" alt="12 bit carry lookahead unit"/>
     </div>
 </body>
 </html>
