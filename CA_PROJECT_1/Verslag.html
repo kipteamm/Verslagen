@@ -57,20 +57,28 @@
 
     <h2>De Morgan</h2>
     <p>
-        Om de twee theorie&euml;n van De Morgan te bewijzen met een waarheidstabel <i>truthtabel</i> zullen we ze individueel bekijken. Allereerst, <u>A+B</u> = <u>A</u> &middot; <u>B</u>.
-        Bijgevoegd vind u de waarheidstabellen voor zowel het linker als het rechter lid.
+        Om de twee theorie&euml;n van De Morgan te bewijzen met een waarheidstabel <i>truthtabel</i> zullen we ze individueel bekijken. 
     </p>
-    <img src="demorgan1.png" alt="De Morgan theorie 1."/>
-    <p>
-        <b>R</b> is telkens het resultaat wanneer je de OR (+) of AND (&middot;) bewerkingen toe past. Zoals u kunt zien zijn deze voor beide leden hetzelfde. Daaruit mag u concluderen dat de beide leden ook aan elkaaar gelijk zijn.
-    </p>
-    <p>
-        Voor de tweede theorie van De Morgan, <u>A &middot; B</u> = <u>A</u> + <u>B</u>, maken we gebruik van een gelijkaardige werkmethode. We stellen de waarheidstabellen van beide leden op.
-    </p>
-    <img src="demorgan2.png" alt="De Morgan theorie 2"/>
-    <p>
-        Opnieuw is <b>R</b> het resultaat wanneer u de booleaanse bewerkingen toepast. R is voor beide tabellen gelijk, waaruit we kunnen concluderen dat ook hier de beide leden gelijk zijn elkaar.
-    </p>
+    <ol>
+        <li>
+            <p>
+                Allereerst, <u>A+B</u> = <u>A</u> &middot; <u>B</u>. Bijgevoegd vind u de waarheidstabellen voor zowel het linker als het rechter lid.
+            </p>
+            <img src="demorgan1.png" alt="De Morgan theorie 1."/>
+            <p>
+                De eerste <b>R</b> is het resultaat wanneer je de logische NOT (<u> </u>) operatie neemt van de voorgaande OR (+). De tweede <b>R</b> (rechts) is de logische AND (&middot;) bewerkingen toe van de twee inversen van A en B. Zoals u kunt zien is de R voor beide hetzelfde, hieruit concluderen we dat de oorspronkelijke vergelijking effectief opgaat.
+            </p>
+        </li>
+        <li>
+            <p>
+                Voor de tweede theorie van De Morgan, <u>A &middot; B</u> = <u>A</u> + <u>B</u>, maken we gebruik van dezelefde werkmethode. We stellen de waarheidstabellen van beide leden op.
+            </p>
+            <img src="demorgan2.png" alt="De Morgan theorie 2"/>
+            <p>
+                Links is <b>R</b> nu het resultaat van de logische NOT van A en B. Rechts is <b>R</b> het resultaat van de logische OR van de inversen van A en B. Opnieuw is R in beide gevallen gelijk. Hieruit concluderen we dat ook hier de beide leden gelijk zijn elkaar.
+            </p>
+        </li>
+    </ol>
     
     <h2>Bewijs voor booleaanse vergelijking</h2>
     <p>
@@ -117,6 +125,42 @@
     </div>
 
     <h2>Implement truth table</h2>
+    <p>
+        Onze werkmethode hier was om voor zowel X als Y een booleaanse vergelijking op te stellen die voor elk bepaalde of X (of Y) aan of uit moest zijn.
+    </p>
+    <ul>
+        <li>
+            <b>X:</b> (<u>A</u> &middot; <u>B</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u> &middot; C) + (A &middot; <u>B</u> &middot; <u>C</u>)
+        </li>
+        <li>
+            <b>Y:</b> (<u>A</u> &middot; <u>B</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u> &middot; C) + (<u>A</u> &middot; B &middot; <u>C</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)
+        </li>
+    </ul>
+    <p>
+        Dit konden we dan verder vereenvoudigen:
+    </p>
+    <ul>
+        <li>
+            = (<u>A</u> &middot; <u>B</u>) &middot; (<u>C</u> + C) + (A &middot; <u>B</u> &middot; <u>C</u>)<br>
+            <note>(Distributive law)</note>
+        </li>
+        <li>
+            = (<u>A</u> &middot; <u>B</u>) &middot; (1) + (A &middot; <u>B</u> &middot; <u>C</u>)<br>
+            <note>(Complement law)</note>
+        </li>
+        <li>
+            = (<u>A</u> &middot; <u>B</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)<br>
+            <note>(Identity law)</note>
+        </li>
+        <li>
+            = <u>B</u> &middot; (<u>A</u> + A &middot; <u>C</u>)<br>
+            <note>(Distributive law)</note>
+        </li>
+        <li>
+            = <u>B</u> &middot; (<u>A</u> + <u>C</u>)<br>
+            <note>(Absorption law)</note>
+        </li>
+    </ul>
     <div style="text-align:center;">
         <img src="opdracht_4.png" alt="Opdracht 4"/>
     </div>
@@ -157,8 +201,8 @@
         </li>
     </ul>
     <p>
-        Dit kunnen we eerst nog versimpelen voordat we ... AND gates en ... OR gates in logisim toevoegen. 
-        We kunnen al deze formules abstraheren tot 8 verschillende AND gates (voor elk mogelijk binair getal), en 7 OR gates (voor elk segment).
+        Dit kunnen we eerst nog versimpelen voordat we 8 AND gates en 7 OR gates in logisim toevoegen. 
+        We kunnen uit deze formules 8 verschillende AND gates halen (die aangeven welk decimaal getal de binaire getallen representeren), en 7 OR gates (voor elk segment).
         Verder kun je ook nog het aantal NOT gates minimaliseren door voor elke input, ook een inverse lijn te trekken.
     </p>
     <div style="text-align:center;">
