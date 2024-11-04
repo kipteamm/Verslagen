@@ -14,6 +14,7 @@
         li {margin-bottom:5px;}
         note {font-size:14px;color: #464646;}
         span {text-wrap:nowrap;}
+        summary {margin:10px 0px;cursor:pointer;}
     </style>
 </head>
 <body>
@@ -120,47 +121,105 @@
     </p>
 
     <h2>NAND gates</h2>
+
+    <p>
+        Uit De Morgan volgt dat er twee manieren zijn om een NAND gate op te bouwen. Je kunt de NOT van een AND nemen, of de inverse van je inputs in een OR steken. We hebben voor opdracht 3 bijde methodes gebruikt. In opdracht 3.2 hebben we de ingebouwde NAND gate van logisim gebruikt.
+    </p>
+
     <div style="text-align:center;">
         <img src="nand_gates.png" alt="NAND gates"/>
     </div>
 
     <h2>Implement truth table</h2>
     <p>
-        Onze werkmethode hier was om voor zowel X als Y een booleaanse vergelijking op te stellen die voor elk bepaalde of X (of Y) aan of uit moest zijn.
+        Onze werkmethode hier was om voor zowel X als Y een booleaanse vergelijking op te stellen die voor elk bepaalde of X (of Y) aan of uit moest zijn. Vervolgens vereenvoudigden we telkens de booleaanse expressie.
     </p>
-    <ul>
-        <li>
-            <b>X:</b> (<u>A</u> &middot; <u>B</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u> &middot; C) + (A &middot; <u>B</u> &middot; <u>C</u>)
-        </li>
-        <li>
-            <b>Y:</b> (<u>A</u> &middot; <u>B</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u> &middot; C) + (<u>A</u> &middot; B &middot; <u>C</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)
-        </li>
-    </ul>
+
+    <b>X:</b> (<u>A</u> &middot; <u>B</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u> &middot; C) + (A &middot; <u>B</u> &middot; <u>C</u>)
+    <details>
+        <summary>= (<u>A</u> &middot; <u>B</u>) + (<u>B</u> &middot; <u>C</u>)</summary>
+
+        <ul>
+            <li>
+                (<u>A</u> &middot; <u>B</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u> &middot; C) + (A &middot; <u>B</u> &middot; <u>C</u>)
+            </li>
+            <li>
+                = (<u>A</u> &middot; <u>B</u>) &middot; (<u>C</u> + C) + (A &middot; <u>B</u> &middot; <u>C</u>)<br>
+                <note>(Distributive law)</note>
+            </li>
+            <li>
+                = (<u>A</u> &middot; <u>B</u>) &middot; (1) + (A &middot; <u>B</u> &middot; <u>C</u>)<br>
+                <note>(Complement law)</note>
+            </li>
+            <li>
+                = (<u>A</u> &middot; <u>B</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)<br>
+                <note>(Identity law)</note>
+            </li>
+            <li>
+                = <u>B</u> &middot; (<u>A</u> + A &middot; <u>C</u>)<br>
+                <note>(Distributive law)</note>
+            </li>
+            <li>
+                = <u>B</u> &middot; (<u>A</u> + <u>C</u>)<br>
+                <note>(Absorption law)</note>
+            </li>
+            <li>
+                = (<u>A</u> &middot; <u>B</u>) + (<u>B</u> &middot; <u>C</u>)<br>
+                <note>(Distribution)</note>
+            </li>
+        </ul>
+    </details>
+    
+    <b>Y:</b> (<u>A</u> &middot; <u>B</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u> &middot; C) + (<u>A</u> &middot; B &middot; <u>C</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)
+    <details>
+        <summary>= (<u>A</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u>) + (<u>B</u> &middot; <u>C</u>)</summary>
+        <ul>
+            <li>
+                <b>Y:</b> (<u>A</u> &middot; <u>B</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u> &middot; C) + (<u>A</u> &middot; B &middot; <u>C</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)
+            </li>
+            <li>
+                = (<u>A</u> &middot; <u>B</u>) &middot; (<u>C</u> + C) + (<u>A</u> &middot; B &middot; <u>C</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)<br>
+                <note>(Distributive law)</note>
+            </li>
+            <li>
+                = (<u>A</u> &middot; <u>B</u>) &middot; (1) + (<u>A</u> &middot; B &middot; <u>C</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)<br>
+                <note>(Complement law)</note>
+            </li>
+            <li>
+                = (<u>A</u> &middot; <u>B</u>) + (<u>A</u> &middot; B &middot; <u>C</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)<br>
+                <note>(Identity law)</note>
+            </li>
+            <li>
+                = (<u>A</u>) &middot; (B &middot; <u>C</u> + <u>B</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)<br>
+                <note>(Distributive law)</note>
+            </li>
+            <li>
+                = (<u>A</u>) &middot; (<u>C</u> + <u>B</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)<br>
+                <note>(Absorption law)</note>
+            </li>
+            <li>
+                = (<u>A</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)<br>
+                <note>(Distribution)</note>
+            </li>
+            <li>
+                = (<u>A</u> &middot; <u>C</u>) + (<u>B</u>) &middot; (<u>A</u> + A &middot; <u>C</u>)<br>
+                <note>(Distributive law)</note>
+            </li>
+            <li>
+                = (<u>A</u> &middot; <u>C</u>) + (<u>B</u>) &middot; (<u>A</u> &middot; <u>C</u>)<br>
+                <note>(Absorption law)</note>
+            </li>
+            <li>
+                = (<u>A</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u>) + (<u>B</u> &middot; <u>C</u>)<br>
+                <note>(Distributive law)</note>
+            </li>
+        </ul>
+    </details>
+
     <p>
-        Dit konden we dan verder vereenvoudigen:
+        We zien dan dat we voor bijde expressies eenzelfde (<u>A</u> &middot; <u>B</u>) en (<u>B</u> &middot; <u>C</u>) bekomen. Dan is er ook nog een overige (<u>A</u> &middot; <u>C</u>).
     </p>
-    <ul>
-        <li>
-            = (<u>A</u> &middot; <u>B</u>) &middot; (<u>C</u> + C) + (A &middot; <u>B</u> &middot; <u>C</u>)<br>
-            <note>(Distributive law)</note>
-        </li>
-        <li>
-            = (<u>A</u> &middot; <u>B</u>) &middot; (1) + (A &middot; <u>B</u> &middot; <u>C</u>)<br>
-            <note>(Complement law)</note>
-        </li>
-        <li>
-            = (<u>A</u> &middot; <u>B</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)<br>
-            <note>(Identity law)</note>
-        </li>
-        <li>
-            = <u>B</u> &middot; (<u>A</u> + A &middot; <u>C</u>)<br>
-            <note>(Distributive law)</note>
-        </li>
-        <li>
-            = <u>B</u> &middot; (<u>A</u> + <u>C</u>)<br>
-            <note>(Absorption law)</note>
-        </li>
-    </ul>
+
     <div style="text-align:center;">
         <img src="opdracht_4.png" alt="Opdracht 4"/>
     </div>
