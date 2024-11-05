@@ -36,8 +36,8 @@
             <b>Email adres:</b> <i>torben.petre@student.uantwerpen.be</i>
         </li>
     </ul>
-    <b>Aantal man-uren besteed:</b> <i>x uur</i><br>
-    <b>Moeilijkheidsgraad:</b> <i>xx</i> /10 (1 is heel makkelijk, 10 is heel moeilijk)<p></p>
+    <b>Aantal man-uren besteed:</b> <i>4 uur</i><br>
+    <b>Moeilijkheidsgraad:</b> <i>5</i> /10 (1 is heel makkelijk, 10 is heel moeilijk)<p></p>
 
     <h2>Inhoud van de oplossing</h2>
     <p>
@@ -45,16 +45,19 @@
     </p>
     <ul>
         <li>
-            <a href="./bestand.ext" target="_blank">bestand1.ext</a>: toelichting van bestand1.ext
+            <a href="waarheidstabel_1_bit_adder.xlsx" target="_blank">waarheidstabel_1_bit_adder</a>: waarheidstabel voor 1-bit Full Adder
         </li>
         <li>
-            <a href="./bestand.ext" target="_blank">bestand2.ext</a>: toelichting van bestand2.ext
+            <a href="12-bit_adder.circ" target="_blank">12-bit_adder</a>: 1-bit Full Adder en 12-bit Ripple Carry Adder
+        </li>
+        <li>
+            <a href="12-bit_lookahead_adder.circ" target="_blank">12-bit_lookahead_adder</a>: 12-bit Carry Lookahead Adder
         </li>
     </ul>
 
-    <h2>1-bit full adder</h2>
+    <h2>1-bit Full Adder</h2>
     <p>
-        Een <i>1-bit full adder</i> heeft als inputs een A en B (de bits die
+        Een <i>1-bit Full Adder</i> heeft als inputs een A en B (de bits die
         je wilt optellen) en een CarryIn. Als output geeft het de som van A en 
         B en een CarryOut (indien relevant). We geven ook meteen de na&iuml;ve
         implementatie mee. Dit is snelts mogelijke oplossigen, maar we gebruiken
@@ -74,42 +77,64 @@
 
     <b>R:</b> (<u>A</u> &middot; <u>B</u> &middot; Ci) + (<u>A</u> &middot; B &middot; <u>Ci</u>) + (A &middot; <u>B</u> &middot; <u>Ci</u>) + (A &middot; B &middot; Ci)
     <details>
-        <summary>= Amazing</summary>
+        <summary>= (A &#8853; B) &#8853; Ci</summary>
 
         <ul>
             <li>
-                [Ci &middot; ((<u>A</u> &middot; <u>B</u>) + (A &middot; B))] + [<u>Ci</u> &middot; ((A &middot; <u>B</u>) + (<u>A</u> &middot; B))]
-            </li>
-            <li>
-                [Ci &middot; (<u>A</u> XOR B)] + [<u>Ci</u> &middot; (A XOR B)]
-            </li>
-            <li>
-                (Ci &middot; <u>Ci</u>) AND (<u>A</u> XOR B)] + [<u>Ci</u> &middot; (A XOR B)]
+                (Ci &middot; ((<u>A</u> &middot; <u>B</u>) + (A &middot; B))) + (<u>Ci</u> &middot; ((A &middot; <u>B</u>) + (<u>A</u> &middot; B)))<br>
                 <note>(Distributive law)</note>
+            </li>
+            <li>
+                (Ci &middot; <u>(A &#8853; B)</u>) + (<u>Ci</u> &middot; (A &#8853; B)) <br>
+                <note>(Introduce XOR gates &#8658; (A &middot; <u>B</u>) + (<u>A</u> &middot; B) = A &#8853; B)</note>
+            </li>
+            <li>
+                (A &#8853; B) &#8853; Ci<br>
+                <note>(Introduce XOR gates &#8658; (A &middot; <u>B</u>) + (<u>A</u> &middot; B) = A &#8853; B)</note>
             </li>
         </ul>
     </details>
     
     <b>Co:</b> (<u>A</u> &middot; B &middot; Ci) + (A &middot; <u>B</u> &middot; Ci) + (A &middot; B &middot; <u>Ci</u>) + (A &middot; B &middot; Ci)
+    <details>
+        <summary>= (Ci &middot; (A &#8853; B)) + (A &middot; B)</summary>
+
+        <ul>
+            <li>
+                (Ci &middot; (<u>A</u> &middot; B) + (A &middot; <u>B</u>)) + (A &middot; B &middot;) &middot; (Ci + <u>Ci</u>)<br>
+                <note>(Distributive law)</note>
+            </li>
+            <li>
+                (Ci &middot; (A &#8853; B)) + ((A &middot; B) &middot; (Ci + <u>Ci</u>))<br>
+                <note>(Introduce XOR gates &#8658; (A &middot; <u>B</u>) + (<u>A</u> &middot; B) = A &#8853; B)</note>
+            </li>
+            <li>
+                (Ci &middot; (A &#8853; B)) + ((A &middot; B) &middot; (1))<br>
+                <note>(Complement law)</note>
+            </li>
+            <li>
+                (Ci &middot; (A &#8853; B)) + (A &middot; B)<br>
+                <note>(Identity law)</note>
+            </li>
+        </ul>
+    </details>
     
     <p>
-        Geoptimaliseerd <br><br>
-        b. Convert the truth table to Boolean algebra, and optimize the Boolean expression. <br>
-        c. Implement the Boolean expression as a circuit called “1-Bit Adder” in Logisim.
+        We kunnen dit nu implementeren met 2 XOR gates, 2 AND gates en een OR gate:
     </p>
 
     <div style="text-align:center;">
         <img src="1_bit_geoptimaliseerd.png" alt="1 bit geoptimaliseerd"/>
     </div>
 
-    <h2>12-bit two's complement ripple carry adder</h2>
+    <h2>12-bit Two's Complement Ripple Carry Adder</h2>
 
     <p>
-        Nu plaatsen we 12 van onze voorgaande 1-bit full adders achter elkaar.
-        Onze 1-bit full adder had een CarryIn en een CarryOut. We zullen
-        telkens de CarryOut van de vorige adder als CarryIn met de volgende
-        adder meegeven. Dit is ook waarom men spreekt van een Ripple Carry 
-        Adder. De eerste adder kreegt een input CarryIn en de laaste input
+        Nu plaatsen we 12 van onze voorgaande 1-bit Full Adders achter elkaar.
+        Onze 1-bit Full Adder had een CarryIn en een CarryOut. We zullen
+        telkens de CarryOut van de vorige Adder als CarryIn met de volgende
+        Adder meegeven. Dit is ook waarom men spreekt van een Ripple Carry 
+        Adder. De eerste Adder kreegt een input CarryIn en de laaste input
         wordt gebruikt om overflow te bepalen. Dit heeft als gevolg dat alles
         sequentieel gebeurt. De som van opeenvolgende bits kan niet bereken
         zolang de Carry niet bekent is. Dit heeft een latency van 36 epsilon
@@ -126,7 +151,7 @@
             <p>
                 Dit kan gebeuren wanneer de som van twee 12-bit (positieve)
                 getallen een nieuw 12-bit getal vormen waarbij de most 
-                significant een 1 wordt. We weten dat bij two's complement, de
+                significant een 1 wordt. We weten dat bij Two's Complement, de
                 most significant bit het teken van het getal weergeeft (waarbij
                 1 negatief representeert). Daardoor weten we dat wanneer het
                 resultaat een 1 als most significant bit heeft, dat twee 
@@ -155,10 +180,10 @@
         <img src="12_bit_ripple_carry_adder.png" alt="12 bit ripple carry adder"/>
     </div>
 
-    <h2>12-bit two's complement carry lookahead adder</h2>
+    <h2>12-bit Two's Complement Carry Lookahead Adder</h2>
     <p>
-        Onze 12-bit two's complement carry lookahead adder zal bestaan uit 3 
-        4-bit carry lookahead adders en een carry lookahead unit. 
+        Onze 12-bit Two's Complement Carry Lookahead Adder zal bestaan uit 3 
+        4-bit Carry Lookahead Adders en een Carry Lookahead Unit. 
     </p>  
     
     <p>
@@ -181,8 +206,8 @@
 
     <p>
         Onze Carry Lookahead Unit neemt de Propagates en Generates die door
-        onze 4-bit adders worden berekent en bepaald de CarryIn voor de 
-        volgende adder.
+        onze 4-bit Adders worden berekent en bepaald de CarryIn voor de 
+        volgende Adder.
     </p>
 
     <div style="text-align:center;">
@@ -200,12 +225,16 @@
     <p>
         Door gebruik te maken van the Carry Lookahead Unit, kunnen we veel 
         sneller uitkomsten berekenen dan met de Ripple Carry. De CarryIns van
-        alle adders worden in parallel berekent met het eindresultaat. Het
+        alle Adders worden in parallel berekent met het eindresultaat. Het
         berekenen van de Propagate en Generate neemt 3 epsilon. Het langste pad
         in de Carry Lookahead Unit is nog eens 3 epsilon. Omdat de Carries en
-        de som in parallel worden berekent, is het totaal van onze 12-bit adder
+        de som in parallel worden berekent, is het totaal van onze 12-bit Adder
         niet meer dan 6 epsilon voor het eindresultaat. De overflow telt nog
         2 gates meer, aldus is het langste pad 8 epsilon.
     </p>
+
+    <footer>
+        &#169; 2024 Etienne El Hachem en Torben Petre&#769;.
+    </footer>
 </body>
 </html>
