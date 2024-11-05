@@ -119,7 +119,9 @@
         Bit. Als dit 1 is spreken we van een negatief getal, anders is het
         positief. We mogen wel niet alleen afgaan op deze Most Significante 
         Bit. Er bestaat de mogelijkheid dat bij de subtractie er een overflow
-        is. Met de overflow moet er ook rekening worden gehouden.
+        is. In dat geval is de Most Significant Bit niet langer betrouwbaar om
+        het teken van het resultaat te bepalen. Daarom is het belangrijk dat
+        er rekening wordt gehouden met de overflow.
     </p>
 
     <div style="text-align:center;">
@@ -128,8 +130,16 @@
 
     <h3>Greater Than</h3>
     <p>
-        De "greater than", met als ALU-operatie 0101, is op gelijkaardige wijze
-        opgesteld als de "less than". maar we nemen nu het inverse van de sing bit. Dit zorgde op eerste zicht voor een probleem omdat we de gevallen waar A en B gelijk waren aan elkaar ook inverteren wat niet de bedoeling was. Dus voegden we een extra and-gate die als ene input de inverse van de sing bit had en als tweede input het inverse van de “equal” zodat we de sing bit niet doorlieten wanneer A en B gelijk waren aan elkaar. 
+        De "greater than", met als ALU-operatie 0101, werkt gelijkaardige aan
+        de "less than". Opnieuw zullen we het verscil van A en B nemen. We 
+        kijken terug naar de Most Significant Bit, alleen is het hier omgekeerd
+        met wat we bij "less than" deden. Opnieuw controleren we de overflow
+        zoals we voorheen deden. Verder moeten we nu ook rekening houden met
+        strikt groter dan. Als het verschil van A en B 0 is, weten we dat ze
+        gelijk zijn aan elkaar, wat niet mag in dit geval. We checken dit door
+        ook nog onze "equals" unit (zie later) te gebruiken. Dit is niet nodig
+        bij "less than" omdat de Most Significant Bit bij A = B, 0 is. 0 zal
+        nooit kleiner dan aangeven dus is de extra controle overbodig.
     </p>
 
     <div style="text-align:center;">
@@ -138,7 +148,13 @@
 
     <h3>Equals</h3>
     <p>
-        De "equals", met als ALU-operatie 0110, vergelijkt A en B en geeft 1 als deze gelijk zijn anders geeft hij 0. Dit doen we met behulp van 12 and-gates en een or-gate. 
+        De "equals", met als ALU-operatie 0110, vergelijkt A en B en geeft 1 
+        als deze gelijk zijn anders 0. Om de gelijkheid te bepalen gebruiken we
+        XOR gates die elke bit individueel vergelijken. Een XOR gate geeft 1
+        als de inputs verschillen van waarde. Als we dan de OR van al die XOR
+        gates nemen, weten we wanneer een bit verschilt van zijn equivalente 
+        bit. Omdat bij equals we willen weten wanneer ze hetzelfde zijn, en 
+        niet verschillen, zullen we hier de inverse van nemen. 
     </p>
 
     <div style="text-align:center;">
@@ -147,8 +163,8 @@
 
     <h3>Not Equals</h3>
     <p>
-        De "not equals", met als ALU-operatie 0111, is de inverse van de equals
-        operatie.
+        De "not equals", met als ALU-operatie 0111, werkt net zoals de "equals"
+        behalve dat we op het einde geen inverse hoeven te nemen.
     </p>
 
     <div style="text-align:center;">
@@ -168,8 +184,9 @@
     <h3>Numeric Inverse</h3>
     <p>
         De "numeric inverse", met als ALU-operatie 1001, maakt gebruik van onze
-        adder. Door het inverse van A te nemen en dit op te tellen met 1, krijgen we de numeric inverse van A. 
-        A.
+        adder. We zullen eerste de logische inverse nemen van A. Deze geven we
+        dan mee aan onze adder met een CarryIn van 1. Dit omdat de numerieke
+        inverse van een binair getal gelijk is aan zijn inverse + 1.
     </p>
 
     <div style="text-align:center;">
@@ -178,7 +195,11 @@
 
     <h3>Shift Left Logical</h3>
     <p>
-        De "shift left logical", met als ALU-operatie 1010, zorgt er voor dat elke bit 1 plaats naar links verschuift. Op de least significant bit komt er dan een nul te staan. Dit doen we met behulp van splitters.
+        De "shift left logical", met als ALU-operatie 1010, verschuift elke bit
+        1 positie naar links. In het geval van binair rekenen betekent dit maal 
+        2. We schuiven alles op met behulp van splitters. Op de vrijgekomen
+        Least Significant Bit zetten we een 0. We moeten bij SLL geen rekening
+        houden met overflow.
     </p>
 
     <div style="text-align:center;">
@@ -187,7 +208,12 @@
 
     <h3>Shift Right Logical</h3>
     <p>
-        De "shift right logical", met als ALU-operatie 1011, zorgt er voor dat elke bit met 1 plaats naar rechts worden geschoven. Op de most significant bit komt er dan een nul te staan. Dit doen we met behulp van splitters.
+        De "shift right logical", met als ALU-operatie 1011, verschuift elke 
+        bit 1 positie naar rechts. In het geval van binair rekenen betekent dit
+        maal 2. We schuiven alles opnieuw op met behulp van splitters. Op de
+        vrijgekomen Most Significant Bit zetten we een 0. Dit betekent dat een
+        getal van teken kan veranderen. We moeten bij SRL geen rekening houden 
+        met overflow.
     </p>
 
     <div style="text-align:center;">
@@ -196,7 +222,14 @@
 
     <h3>Shift Left Arithmetic</h3>
     <p>
-        De "shift left arithmetic", met als ALU-operatie 1100, zorgt er voor dat elke bit met 1 plaats naar links verschuift en op de least significant bit komt er een 0. We controleren overflow door de 11de en de 10de bit met elkaar te vergelijken, als deze verschillend zijn zal er overflow zijn. 
+        De "shift left arithmetic", met als ALU-operatie 1100, werkt vrijwel
+        hetzelfde als de "shift left logical", behalve dat er nu wel rekening
+        moet worden gehouden met overflow. We controleren op overflow door de 
+        10<sup>de</sup> 11<sup>de</sup> bit van het originele getal met elkaar
+        te vergelijken. Als deze verschillen is er overflow. We weten dat de
+        MSB (11<sup>de</sup> bit)het teken van het getal aangeeft, dus als de
+        10<sup>de</sup> bit een andere waarden heeft, zal het getal van teken
+        veranderen en is er dus overflow. 
     </p>
 
     <div style="text-align:center;">
@@ -205,11 +238,15 @@
 
     <h3>Shift Right Arithmetic</h3>
     <p>
-        De "shift right arithmetic", met als ALU-operatie 1101, zorgt er voor dat elke bit met 1 plaats naar rechts verschuift en op de most significant bit komt dan weer de 11de bit van ervoor. Dit veroorzaakt ook dat er geen overflow geproduceerd kan worden. 
+        De "shift right arithmetic", met als ALU-operatie 1101, werkt vrijwel
+        hetzelde als de "shift right logical", behalve dat nu het teken van
+        het getal behouden zal worden. We doen dit door de MSB over te nemen in
+        de plaats van deze naar 0 te zetten. Voor de rest werkt dit exact 
+        hetzelfde.
     </p>
 
     <div style="text-align:center;">
-        <img src="shift_right_logical.png" alt="Shift right logical"/>
+        <img src="shift_right_arithmetic.png" alt="Shift right arithmetic"/>
     </div>
 
     <h3>Generate 0</h3>
