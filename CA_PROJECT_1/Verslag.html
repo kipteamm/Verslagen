@@ -49,7 +49,10 @@
             <a href="waarheidstabellen_de_morgan.xlsx" target="_blank">waarheidstabellen_de_morgan.xlsx</a>: waarheidstabellen De Morgan
         </li>
         <li>
-            <a href="nand_gates.circ" target="_blank">nand_gates.circ</a>: Logisim bestand met NAND gates.
+            <a href="nand_gates.circ" target="_blank">nand_gates.circ</a>: Logisim bestand met NAND gates
+        </li>
+        <li>
+            <a href="truthtable_implementation.circ" target="_blank">truthtable_implementation.circ</a>: Logisim bestand met implementatie van de truthtable
         </li>
         <li>
             <a href="7_segment_display.circ" target="_blank">7_segment_display.circ</a>: Logisim bestand met 7 segment display.
@@ -58,7 +61,7 @@
 
     <h2>De Morgan</h2>
     <p>
-        Om de twee theorie&euml;n van De Morgan te bewijzen met een waarheidstabel <i>truthtabel</i> zullen we ze individueel bekijken. 
+        Om de twee theorie&euml;n van De Morgan te bewijzen met een waarheidstabel <i>truthtable</i> zullen we ze individueel bekijken. 
     </p>
     <ol>
         <li>
@@ -168,7 +171,7 @@
     
     <b>Y:</b> (<u>A</u> &middot; <u>B</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u> &middot; C) + (<u>A</u> &middot; B &middot; <u>C</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)
     <details>
-        <summary>= (<u>A</u> &middot; <u>C</u>) + (<u>B</u>) &middot; (<u>A</u> + <u>C</u>)</summary>
+        <summary>= (<u>A</u> &middot; <u>C</u>) + ((<u>B</u>) &middot; (<u>A</u> + <u>C</u>))</summary>
         <ul>
             <li>
                 <b>Y:</b> (<u>A</u> &middot; <u>B</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u> &middot; C) + (<u>A</u> &middot; B &middot; <u>C</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)
@@ -198,11 +201,11 @@
                 <note>(Distribution)</note>
             </li>
             <li>
-                = (<u>A</u> &middot; <u>C</u>) + (<u>B</u>) &middot; (<u>A</u> + A &middot; <u>C</u>)<br>
+                = (<u>A</u> &middot; <u>C</u>) + ((<u>B</u>) &middot; (<u>A</u> + A &middot; <u>C</u>))<br>
                 <note>(Distributive law)</note>
             </li>
             <li>
-                = (<u>A</u> &middot; <u>C</u>) + (<u>B</u>) &middot; (<u>A</u> + <u>C</u>)<br>
+                = (<u>A</u> &middot; <u>C</u>) + ((<u>B</u>) &middot; (<u>A</u> + <u>C</u>))<br>
                 <note>(Absorption law)</note>
             </li>
         </ul>
