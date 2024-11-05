@@ -45,21 +45,21 @@
     </p>
     <ul>
         <li>
-            <a href="alu.circ" target="_blank">alu.circ</a>: toelichting van bestand1.ext
+            <a href="alu.circ" target="_blank">alu.circ</a>: ALU test bestand
         </li>
         <li>
-            <a href="12-bit ALU.circ" target="_blank">12-bit_ALU.circ</a>: toelichting van bestand2.ext
+            <a href="12-bit ALU.circ" target="_blank">12-bit_ALU.circ</a>: ALU met operaties
         </li>
         <li>
-            <a href="12-bit_lookahead_adder.circ" target="_blank">12-bit_lookahead_adder.circ</a>: toelichting van bestand2.ext
+            <a href="12-bit_lookahead_adder.circ" target="_blank">12-bit_lookahead_adder.circ</a>: 12-bit Carry Lookahead Adder
         </li>
     </ul>
 
     <h2>Verslag</h2>
     <p>
         Onze 12-bit ALU bevat een A Operand, een B Operand en een 4 bit 
-        selector. Deze 4 bit selector zorgt voor de selectie van de operatie 
-        die u wilt doorlaten. Er is een 12-bit resultaat en een 1-bit overflow.
+        selector. Deze 4 bit selector bepaald de operatie die de ALU zal
+        doorlaten. Er is een 12-bit resultaat en een 1-bit overflow.
     </p>
 
     <h3>Numeric Addition</h3>
@@ -77,13 +77,13 @@
     <p>
         De "numeric subtraction", met als ALU-operatie 0001 maakt opnieuw 
         gebruik van onze adder. Wat we eigenlijk doen is een som van een 
-        positief en een negatief getal (en niet echt aftrekken). We behouden 
+        positief en een negatief getal (en niet echt het verschil). We behouden 
         A zoals deze is, maar nemen de numeric inverse van B. Vervolgens tellen
-        we A en <u>B</u> bij elkaar op. Hierbij wordt de initiele Carry op 1 
-        gezet. Dit doen we omdat voor eender welk positief binair getal, zijn 
+        we A en <u>B</u> bij elkaar op. Hierbij wordt de initi&#235;le Carry op 1 
+        gezet. Dit doen we omdat voor eender welk positief binair getal zijn 
         negatieve equivalent gelijk is aan zijn inverse + 1. De inverse hadden 
         we al (<u>B</u>), we moesten enkel nog 1 erbij optellen. Dat doen we
-        met de initiele Carry.
+        met die initi&#235;le Carry.
     </p>
     
     <div style="text-align:center;">
@@ -103,7 +103,7 @@
 
     <h3>OR</h3>
     <p>
-        De "and", met als ALU-operatie 0011, werkt met een OR-gate die de 
+        De "or", met als ALU-operatie 0011, werkt met een OR-gate die de 
         12-bit A en B als inputs heeft en hiervan de logische OR als resultaat
         geeft. 
     </p>
@@ -116,15 +116,15 @@
     <p>
         De "less than", met als ALU-operatie 0100, maakt gebruik van de 
         "numeric substraction". We nemen het verschil van A en B. Als het 
-        resultaat positief is, weten we dat A groter is dan B. Als A min B 
+        resultaat positief is, weten we dat A groter is dan B. Als het verschil 
         negatief is, weten we dat A kleiner is dan B. Om te bepalen of het 
         resultaat positief of negatief is, kijken we naar de Most Significant
-        Bit. Als dit 1 is spreken we van een negatief getal, anders is het
-        positief. We mogen wel niet alleen afgaan op deze Most Significante 
-        Bit. Er bestaat de mogelijkheid dat bij de subtractie er een overflow
-        is. In dat geval is de Most Significant Bit niet langer betrouwbaar om
-        het teken van het resultaat te bepalen. Daarom is het belangrijk dat
-        er rekening wordt gehouden met de overflow.
+        Bit. Als dit 1 is, spreken we van een negatief getal. Als dit 0 is, is 
+        het getal positief. We mogen niet alleen afgaan op deze Most 
+        Significante Bit. Er bestaat de mogelijkheid dat bij de subtractie er 
+        een overflow is. In dat geval is de Most Significant Bit niet langer 
+        betrouwbaar om het teken van het resultaat te bepalen. Daarom is het
+        belangrijk dat er rekening wordt gehouden met de overflow.
     </p>
 
     <div style="text-align:center;">
@@ -135,14 +135,15 @@
     <p>
         De "greater than", met als ALU-operatie 0101, werkt gelijkaardige aan
         de "less than". Opnieuw zullen we het verscil van A en B nemen. We 
-        kijken terug naar de Most Significant Bit, alleen is het hier omgekeerd
-        met wat we bij "less than" deden. Opnieuw controleren we de overflow
-        zoals we voorheen deden. Verder moeten we nu ook rekening houden met
-        strikt groter dan. Als het verschil van A en B 0 is, weten we dat ze
-        gelijk zijn aan elkaar, wat niet mag in dit geval. We checken dit door
-        ook nog onze "equals" unit (zie later) te gebruiken. Dit is niet nodig
-        bij "less than" omdat de Most Significant Bit bij A = B, 0 is. 0 zal
-        nooit kleiner dan aangeven dus is de extra controle overbodig.
+        kijken terug naar de Most Significant Bit, doen we hier het omgekeerde
+        van wat we bij "less than" deden. Ook nu controleren we de overflow
+        zoals voorheen. Verschillend is dat we nog een extra controle moeten 
+        doen om te kijken of het getal werkelijk strikt groter is. Als het
+        verschil van A en B 0 is, weten we dat ze gelijk  zijn aan elkaar, wat 
+        niet mag in dit geval. We checken dit door ook nog onze "equals" unit
+        (zie later) te gebruiken. Dit is niet nodig bij "less than" omdat de 
+        Most Significant Bit bij A = B, 0 is. 0 zal nooit kleiner dan aangeven 
+        dus is de extra controle overbodig.
     </p>
 
     <div style="text-align:center;">
@@ -152,12 +153,13 @@
     <h3>Equals</h3>
     <p>
         De "equals", met als ALU-operatie 0110, vergelijkt A en B en geeft 1 
-        als deze gelijk zijn anders 0. Om de gelijkheid te bepalen gebruiken we
-        XOR gates die elke bit individueel vergelijken. Een XOR gate geeft 1
+        als deze gelijk zijn (anders 0). Om de gelijkheid te bepalen gebruiken 
+        we XOR gates die elke bit individueel vergelijken. Een XOR gate geeft 1
         als de inputs verschillen van waarde. Als we dan de OR van al die XOR
-        gates nemen, weten we wanneer een bit verschilt van zijn equivalente 
-        bit. Omdat bij equals we willen weten wanneer ze hetzelfde zijn, en 
-        niet verschillen, zullen we hier de inverse van nemen. 
+        gates nemen, weten we wanneer een A bit verschilt van zijn 
+        overeenkomende B bit. Omdat bij equals we willen weten wanneer ze 
+        hetzelfde zijn, en niet wanneer ze verschillen, zullen we hier de 
+        inverse van nemen. 
     </p>
 
     <div style="text-align:center;">
@@ -228,11 +230,11 @@
         De "shift left arithmetic", met als ALU-operatie 1100, werkt vrijwel
         hetzelfde als de "shift left logical", behalve dat er nu wel rekening
         moet worden gehouden met overflow. We controleren op overflow door de 
-        10<sup>de</sup> 11<sup>de</sup> bit van het originele getal met elkaar
-        te vergelijken. Als deze verschillen is er overflow. We weten dat de
-        MSB (11<sup>de</sup> bit)het teken van het getal aangeeft, dus als de
-        10<sup>de</sup> bit een andere waarden heeft, zal het getal van teken
-        veranderen en is er dus overflow. 
+        10<sup>de</sup> en 11<sup>de</sup> bit van het originele getal met 
+        elkaar te vergelijken. Als deze verschillen is er overflow. We weten 
+        dat de MSB (11<sup>de</sup> bit) het teken van het getal aangeeft. Als
+        de 10<sup>de</sup> bit een andere waarden heeft, zal het getal van teken
+        veranderen (nadat we verschuiven) en is er dus overflow. 
     </p>
 
     <div style="text-align:center;">
@@ -244,7 +246,7 @@
         De "shift right arithmetic", met als ALU-operatie 1101, werkt vrijwel
         hetzelde als de "shift right logical", behalve dat nu het teken van
         het getal behouden zal worden. We doen dit door de MSB over te nemen in
-        de plaats van deze naar 0 te zetten. Voor de rest werkt dit exact 
+        plaats van deze naar 0 te zetten. Voor de rest werkt dit exact 
         hetzelfde.
     </p>
 

@@ -59,9 +59,9 @@
     <p>
         Een <i>1-bit Full Adder</i> heeft als inputs een A en B (de bits die
         je wilt optellen) en een CarryIn. Als output geeft het de som van A en 
-        B en een CarryOut (indien relevant). We geven ook meteen de na&iuml;ve
-        implementatie mee. Dit is snelts mogelijke oplossigen, maar we gebruiken
-        een onnodig grote hoeveelheid gates. Daarom zullen we dit verder nog
+        B en een CarryOut (indien relevant). We geven meteen even de na&iuml;ve
+        implementatie mee. Dit is de snelst mogelijke oplossigen, maar we 
+        gebruiken een onnodig grote hoeveelheid gates. Daarom zullen we dit 
         optimaliseren.
     </p>
 
@@ -70,9 +70,9 @@
     </div>
 
     <p>
-        We zullen de waarhiedstabel om te zetten naar een booleaanse expressie 
-        voor zowel R (het resultaat van de som) als Co (de CarryOut). Deze 
-        kunnen we dan volgens vereenvoudigen.
+        We zetten de waarheidstabel om naar booleaanse expressies voor zowel R
+        (het resultaat van de som) als Co (de CarryOut). Deze kunnen we dan 
+        vereenvoudigen.
     </p>
 
     <b>R:</b> (<u>A</u> &middot; <u>B</u> &middot; Ci) + (<u>A</u> &middot; B &middot; <u>Ci</u>) + (A &middot; <u>B</u> &middot; <u>Ci</u>) + (A &middot; B &middot; Ci)
@@ -134,15 +134,15 @@
         Onze 1-bit Full Adder had een CarryIn en een CarryOut. We zullen
         telkens de CarryOut van de vorige Adder als CarryIn met de volgende
         Adder meegeven. Dit is ook waarom men spreekt van een Ripple Carry 
-        Adder. De eerste Adder kreegt een input CarryIn en de laaste input
-        wordt gebruikt om overflow te bepalen. Dit heeft als gevolg dat alles
-        sequentieel gebeurt. De som van opeenvolgende bits kan niet bereken
-        zolang de Carry niet bekent is. Dit heeft een latency van 36 epsilon
-        voor het eindresultaat, en 38 voor de Overflow.
+        Adder. De eerste Adder krijgt een externe CarryIn als input en de 
+        laaste CarryOut wordt gebruikt om overflow te bepalen. Dit heeft als 
+        gevolg dat alles sequentieel gebeurt. De som van opeenvolgende bits kan
+        niet worden berekend zolang de Carry onbekend is. Dit heeft een latency
+        van 36 epsilon voor het eindresultaat, en 38 voor de overflow.
     </p>
 
     <p>
-        Overflow bestaat uit twee situaties:
+        Overflow komt voor in twee situaties:
     </p>
     
     <ol>
@@ -152,9 +152,9 @@
                 Dit kan gebeuren wanneer de som van twee 12-bit (positieve)
                 getallen een nieuw 12-bit getal vormen waarbij de most 
                 significant een 1 wordt. We weten dat bij Two's Complement, de
-                most significant bit het teken van het getal weergeeft (waarbij
+                Most Significant Bit het teken van het getal weergeeft (waarbij
                 1 negatief representeert). Daardoor weten we dat wanneer het
-                resultaat een 1 als most significant bit heeft, dat twee 
+                resultaat een 1 als Most Significant Bit heeft, dat twee 
                 positieve getallen negatief worden.
             </p>
         </li>
@@ -164,16 +164,16 @@
                 Dit werkt op een gelijkaardige manier als het vorige puntje.
                 Wanneer de som van negatieve getallen en nog groter negatief
                 getal is (dat niet met 12 bits gerepresenteerd kan worden) zal
-                de most significant bit niet langer correct het teken van het
-                getal weergeven.
+                de Most Significant Bit niet langer betrouwbaar het teken van 
+                het getal weergeven.
             </p>
         </li>
     </ol>
     
     <p>
-        Om dit te implementeren kijken we naar de most significant bits van de
-        input getallen A en B. Als deze dezelfde zijn en verschillen van de 
-        most significant bit van het resultaat, weten we dat er overflow is.
+        Om overflow te controleren kijken we naar de Most Significant Bits van 
+        de input getallen A en B. Als deze dezelfde zijn en verschillen van de 
+        Most Significant Bit van het resultaat, weten we dat er overflow is.
     </p>
 
     <div style="text-align:center;">
@@ -196,8 +196,8 @@
 
     <p>
         In rood zie je het langste pad dat uit 6 gates bestaat. De oranje pijl
-        toent dat de oranje gate in parallel met de eerste serie rode gates 
-        wordt berekent.
+        toont dat de oranje gate in parallel met de eerste serie rode gates 
+        wordt berekend.
     </p>
 
     <div style="text-align:center;">
@@ -206,7 +206,7 @@
 
     <p>
         Onze Carry Lookahead Unit neemt de Propagates en Generates die door
-        onze 4-bit Adders worden berekent en bepaald de CarryIn voor de 
+        onze 4-bit Adders worden berekend en bepaald de CarryIn voor de 
         volgende Adder.
     </p>
 
@@ -215,7 +215,7 @@
     </div>
 
     <p>
-        Wanneer je onze circuits dan combineert krijg je het volgende.
+        Wanneer je deze circuits combineert krijg je het volgende:
     </p>
 
     <div style="text-align:center;">
@@ -223,9 +223,9 @@
     </div>
 
     <p>
-        Door gebruik te maken van the Carry Lookahead Unit, kunnen we veel 
-        sneller uitkomsten berekenen dan met de Ripple Carry. De CarryIns van
-        alle Adders worden in parallel berekent met het eindresultaat. Het
+        Door gebruik te maken van de Carry Lookahead Unit, kunnen we veel 
+        sneller uitkomsten berekenen dan met een Ripple Carry. De CarryIns van
+        alle Adders worden in parallel met het eindresultaat berekend. Het
         berekenen van de Propagate en Generate neemt 3 epsilon. Het langste pad
         in de Carry Lookahead Unit is nog eens 3 epsilon. Omdat de Carries en
         de som in parallel worden berekent, is het totaal van onze 12-bit Adder

@@ -70,23 +70,32 @@
             </p>
             <img src="images/demorgan1.png" alt="De Morgan theorie 1."/>
             <p>
-                De eerste <b>R</b> is het resultaat wanneer je de logische NOT (<u> </u>) operatie neemt van de voorgaande OR (+). De tweede <b>R</b> (rechts) is de logische AND (&middot;) bewerkingen toe van de twee inversen van A en B. Zoals u kunt zien is de R voor beide hetzelfde, hieruit concluderen we dat de oorspronkelijke vergelijking effectief opgaat.
+                De eerste <b>R</b> is het resultaat wanneer je de logische NOT
+                (<u> </u>) operatie neemt van de voorgaande OR (+). De tweede 
+                <b>R</b> (rechts) is de logische AND (&middot;) bewerkingen van
+                de inversen van A en B. Zoals u kunt zien is de R voor beide 
+                hetzelfde, hieruit concluderen we dat de oorspronkelijke 
+                gelijkheid effectief opgaat.
             </p>
         </li>
         <li>
             <p>
-                Voor de tweede theorie van De Morgan, <u>A &middot; B</u> = <u>A</u> + <u>B</u>, maken we gebruik van dezelefde werkmethode. We stellen de waarheidstabellen van beide leden op.
+                Voor de tweede theorie van De Morgan, <u>A &middot; B</u> = <u>A</u> + <u>B</u>, maken we gebruik van dezelfde werkmethode. We stellen de waarheidstabellen van beide leden op.
             </p>
             <img src="images/demorgan2.png" alt="De Morgan theorie 2"/>
             <p>
-                Links is <b>R</b> nu het resultaat van de logische NOT van A en B. Rechts is <b>R</b> het resultaat van de logische OR van de inversen van A en B. Opnieuw is R in beide gevallen gelijk. Hieruit concluderen we dat ook hier de beide leden gelijk zijn elkaar.
+                Links is <b>R</b> nu het resultaat van de logische NOT van A 
+                AND B. Rechts is <b>R</b> het resultaat van de logische OR van 
+                de inversen van A en B. Opnieuw is R in beide gevallen gelijk. 
+                Hieruit concluderen we dat ook hier de beide leden gelijk zijn 
+                aan elkaar.
             </p>
         </li>
     </ol>
     
     <h2>Bewijs voor booleaanse vergelijking</h2>
     <p>
-        ((A &middot; B) + (A &middot; C) + (B &middot; C)) &middot; (<u>A + B + C</u>) = (A &middot; B &middot; <u>C</u>) + (A &middot; <u>B</u> &middot; C) + (<u>A</u> &middot; B &middot; C)
+        ((A &middot; B) + (A &middot; C) + (B &middot; C)) &middot; (<u>A &middot; B &middot; C</u>) = (A &middot; B &middot; <u>C</u>) + (A &middot; <u>B</u> &middot; C) + (<u>A</u> &middot; B &middot; C)
     </p>
     <p>
         Om deze booleaanse vergelijking te bewijzen zullen we een reeks stappen doorgaan. We zullen het linkerlid omvormen naar het rechterlid.
@@ -94,7 +103,10 @@
 
     <ol>
         <li>
-            = (A &middot; B) &middot; (<u>A + B + C</u>) + (A &middot; C) &middot; (<u>A + B + C</u>) + (B &middot; C) &middot; (<u>A + B + C</u>) <br>
+            = ((A &middot; B) + (A &middot; C) + (B &middot; C)) &middot; (<u>A &middot; B &middot; C</u>)
+        </li>
+        <li>
+            = (A &middot; B) &middot; (<u>A &middot; B &middot; C</u>) + (A &middot; C) &middot; (<u>A &middot; B &middot; C</u>) + (B &middot; C) &middot; (<u>A &middot; B &middot; C</u>) <br>
             <note>(Distributive law)</note>
         </li>
         <li>
@@ -135,7 +147,7 @@
 
     <h2>Implement truth table</h2>
     <p>
-        Onze werkmethode hier was om voor zowel X als Y een booleaanse vergelijking op te stellen die voor elk bepaalde of X (of Y) aan of uit moest zijn. Vervolgens vereenvoudigden we telkens de booleaanse expressie.
+        Onze werkmethode hier was om voor zowel X als Y een booleaanse vergelijking op te stellen die voor X of Y bepaalde of deze aan of uit moest zijn. Vervolgens vereenvoudigden we telkens de booleaanse expressie.
     </p>
 
     <b>X:</b> (<u>A</u> &middot; <u>B</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u> &middot; C) + (A &middot; <u>B</u> &middot; <u>C</u>)
@@ -221,15 +233,19 @@
 
     <h2>7-segment display</h2>
     <p>
-        Om elk binair cijfer dat we opgeven weer te geven, moeten we een specifieke waarheidstabel opstellen.
-        Deze waarheidstabel neemt een 3-bit binairgetal als invoer en heeft voor elk van de zeven segmenten een output met een waarde van 1 of 0 (true of false).
-        De tabel beschrijft voor elk binair getal of een segment moet worden opgelicht of niet. Dit wordt gedaan door een waarde van 1 of true op te geven.
-        Als een segment niet moet worden opgelicht om een getal weer te geven, bevat de tabel een 0 (of false). Deze tabel ziet er zo uit:
+        Om elk binair cijfer dat we opgeven weer te geven, beginnen we met het
+        opstellen van een waarheidstabel. Deze waarheidstabel neemt een 3-bit
+        binair getal als invoer en heeft voor elk van de zeven segmenten een
+        output met een waarde van 1 of 0 (true of false). De tabel beschrijft 
+        voor elk binair getal of een segment moet worden opgelicht of niet. Dit
+        wordt gedaan door een waarde van 1 of true op te geven. Als een segment
+        niet moet worden opgelicht om een getal weer te geven, bevat de tabel 
+        een 0 (of false). Deze tabel ziet er zo uit:
     </p>
     <img src="images/7segmenttruthtable.png" alt="7 segment display truth table"/>
     <p>
         Vervolgens kun je voor elk segment [T-Z] een <i>sum of products</i> opstellen. 
-        Dit kan je zien als een reeks voorwaarden die niet allemaal waar moeten zijn, maar wanneer er e&#769;e&#769;n waar is, het segment wel aan zal springen.
+        Dit kan je zien als een reeks voorwaarden die niet allemaal waar moeten zijn, maar wanneer er e&#769;e&#769;n waar is zal het segment wel aan springen.
     </p>
     <ul>
         <li>
