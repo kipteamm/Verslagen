@@ -54,13 +54,43 @@
 
     <h2>1-bit full adder</h2>
     <p>
-        Ongeoptimaliseerd <br><br>
-        a. Determine the inputs and outputs of a 1-bit full adder and build a truth table.
+        Een <i>1-bit full adder</i> heeft als inputs een A en B (de bits die
+        je wilt optellen) en een CarryIn. Als output geeft het de som van A en 
+        B en een CarryOut (indien relevant). We geven ook meteen de na&iuml;ve
+        implementatie mee. Dit is snelts mogelijke oplossigen, maar we gebruiken
+        een onnodig grote hoeveelheid gates. Daarom zullen we dit verder nog
+        optimaliseren.
     </p>
 
     <div style="text-align:center;">
         <img src="1_bit_ongeoptimaliseerd.png" alt="1 bit niet geoptimaliseerd"/>
     </div>
+
+    <p>
+        We zullen de waarhiedstabel om te zetten naar een booleaanse expressie 
+        voor zowel R (het resultaat van de som) als Co (de CarryOut). Deze 
+        kunnen we dan volgens vereenvoudigen.
+    </p>
+
+    <b>R:</b> (<u>A</u> &middot; <u>B</u> &middot; Ci) + (<u>A</u> &middot; B &middot; <u>Ci</u>) + (A &middot; <u>B</u> &middot; <u>Ci</u>) + (A &middot; B &middot; Ci)
+    <details>
+        <summary>= Amazing</summary>
+
+        <ul>
+            <li>
+                [Ci &middot; ((<u>A</u> &middot; <u>B</u>) + (A &middot; B))] + [<u>Ci</u> &middot; ((A &middot; <u>B</u>) + (<u>A</u> &middot; B))]
+            </li>
+            <li>
+                [Ci &middot; (<u>A</u> XOR B)] + [<u>Ci</u> &middot; (A XOR B)]
+            </li>
+            <li>
+                (Ci &middot; <u>Ci</u>) AND (<u>A</u> XOR B)] + [<u>Ci</u> &middot; (A XOR B)]
+                <note>(Distributive law)</note>
+            </li>
+        </ul>
+    </details>
+    
+    <b>Co:</b> (<u>A</u> &middot; B &middot; Ci) + (A &middot; <u>B</u> &middot; Ci) + (A &middot; B &middot; <u>Ci</u>) + (A &middot; B &middot; Ci)
     
     <p>
         Geoptimaliseerd <br><br>
@@ -72,20 +102,50 @@
         <img src="1_bit_geoptimaliseerd.png" alt="1 bit geoptimaliseerd"/>
     </div>
 
-    <h2>12-bit two’s complement ripple carry adder</h2>
+    <h2>12-bit two's complement ripple carry adder</h2>
 
     <p>
-        a. Create a new circuit in the same logisim file where you created your 1-bit adder. You
-        can do this by choosing from the menu ‘Project’ - ‘Add Circuit’. You can then choose
-        which circuit you want to edit by double clicking it in the library menu on the left
-        side. You can use a self made circuit as a building block in another circuit, in the
-        same way as you use other blocks/gates in your circuit. The interface of your block
-        is determined by the input and output ports you created in its circuit. <br>
-        b. Use 1-bit adders to create a 12-bit adder, that adds two 12-bit wide inputs. <br>
-        c. Think about a way how overflow can be determined from carry outs. Overflow hap-
-        pens for example in these cases: 2047 + 1 = -2048 or -2048 + (-1) = 2047. Add an
-        output bit denoting overflow to the circuit containing your 12-bit two’s complement
-        adder.
+        Nu plaatsen we 12 van onze voorgaande 1-bit full adders achter elkaar.
+        Onze 1-bit full adder had een CarryIn en een CarryOut. We zullen
+        telkens de CarryOut van de vorige adder als CarryIn met de volgende
+        adder meegeven. Dit is ook waarom men spreekt van een Ripple Carry 
+        Adder. De eerste adder kreegt een input CarryIn en de laaste input
+        wordt gebruikt om overflow te bepalen.
+    </p>
+
+    <p>
+        Overflow bestaat uit twee situaties:
+    </p>
+    
+    <ol>
+        <li>
+            Je telt twee positieve getallen op die een negatief getal vormen.
+            <p>
+                Dit kan gebeuren wanneer de som van twee 12-bit (positieve)
+                getallen een nieuw 12-bit getal vormen waarbij de most 
+                significant een 1 wordt. We weten dat bij two's complement, de
+                most significant bit het teken van het getal weergeeft (waarbij
+                1 negatief representeert). Daardoor weten we dat wanneer het
+                resultaat een 1 als most significant bit heeft, dat twee 
+                positieve getallen negatief worden.
+            </p>
+        </li>
+        <li>
+            Je telt twee negatieve getallen op die een positief getal vormen.
+            <p>
+                Dit werkt op een gelijkaardige manier als het vorige puntje.
+                Wanneer de som van negatieve getallen en nog groter negatief
+                getal is (dat niet met 12 bits gerepresenteerd kan worden) zal
+                de most significant bit niet langer correct het teken van het
+                getal weergeven.
+            </p>
+        </li>
+    </ol>
+    
+    <p>
+        Om dit te implementeren kijken we naar de most significant bits van de
+        input getallen A en B. Als deze dezelfde zijn en verschillen van de 
+        most significant bit van het resultaat, weten we dat er overflow is.
     </p>
 
     <div style="text-align:center;">
@@ -94,14 +154,22 @@
 
     <h2>12-bit two's complement carry lookahead adder</h2>
     <p>
-        a. Build a circuit for a 4-bit adder block. This block has inputs carryIn, a0, a1, a2, a3,
-        b0, b1, b2, b3 and outputs s0, s1, s2, s3, P0, G0. Note that there is no output for
-        carryOut, as a carry lookahead adder doesn’t use ci−1. <br>
-        b. Optimise this 4-bit adder block to decrease the circuit latency (maximum number of
-        ports traversed). Do this by expressing your block as a set of Boolean equations (for
-        every output pin, in terms of input pins), and using Boolean algebra or a truth table
-        to optimise these equations. What is always the maximum latency for combinatorial
-        circuits? Build your optimised 4-bit adder block.
+        Onze 12-bit two's complement carry lookahead adder zal bestaan uit 3 
+        4-bit carry lookahead adders en een carry lookahead unit. 
+    </p>  
+    
+    <p>
+        Voor onze 4-bit Carry Lookahead Adder berekende we telkens de 
+        propagates en generates voor alle inputs (A en B). Dit doen we omdat 
+        deze gebruikt kunnen worden om zowel de grote Propogate en Generate te 
+        berekenen als de verwachte som. We hebben zo weinig mogelijk gates
+        gebruikt voor onze implementatie. We komen op een totaal van 6 epsilon.
+    </p>
+
+    <p>
+        In rood zie je het langste pad dat uit 6 gates bestaat. De oranje pijl
+        toent dat de oranje gate in parallel met de eerste serie rode gates 
+        wordt berekent.
     </p>
 
     <div style="text-align:center;">
@@ -109,8 +177,9 @@
     </div>
 
     <p>
-        c. Build a circuit of a 12-bit two’s complement carry lookahead adder by creating a
-“carry lookahead unit” that uses three of your own 4-bit adder blocks.
+        Onze Carry Lookahead Unit neemt de Propagates en Generates die door
+        onze 4-bit adders worden berekent en bepaald de CarryIn voor de 
+        volgende adder.
     </p>
 
     <div style="text-align:center;">
@@ -118,11 +187,17 @@
     </div>
 
     <p>
-        d. On this 12-bit adder circuit, create an extra output bit, denoting overflow.
+        Wanneer je onze circuits dan combineert krijg je het volgende.
     </p>
 
     <div style="text-align:center;">
         <img src="12_bit_carry_lookahead.png" alt="12 bit carry lookahead unit"/>
     </div>
+
+    <p>
+        Door gebruik te maken van the Carry Lookahead Unit, kunnen we veel 
+        sneller uitkomsten berekenen dan met de Ripple Carry. De CarryIns van
+        alle adders worden in parallel berekent met het eindresultaat.
+    </p>
 </body>
 </html>
