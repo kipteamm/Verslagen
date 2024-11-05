@@ -110,7 +110,10 @@
         telkens de CarryOut van de vorige adder als CarryIn met de volgende
         adder meegeven. Dit is ook waarom men spreekt van een Ripple Carry 
         Adder. De eerste adder kreegt een input CarryIn en de laaste input
-        wordt gebruikt om overflow te bepalen.
+        wordt gebruikt om overflow te bepalen. Dit heeft als gevolg dat alles
+        sequentieel gebeurt. De som van opeenvolgende bits kan niet bereken
+        zolang de Carry niet bekent is. Dit heeft een latency van 36 epsilon
+        voor het eindresultaat, en 38 voor de Overflow.
     </p>
 
     <p>
@@ -197,7 +200,12 @@
     <p>
         Door gebruik te maken van the Carry Lookahead Unit, kunnen we veel 
         sneller uitkomsten berekenen dan met de Ripple Carry. De CarryIns van
-        alle adders worden in parallel berekent met het eindresultaat.
+        alle adders worden in parallel berekent met het eindresultaat. Het
+        berekenen van de Propagate en Generate neemt 3 epsilon. Het langste pad
+        in de Carry Lookahead Unit is nog eens 3 epsilon. Omdat de Carries en
+        de som in parallel worden berekent, is het totaal van onze 12-bit adder
+        niet meer dan 6 epsilon voor het eindresultaat. De overflow telt nog
+        2 gates meer, aldus is het langste pad 8 epsilon.
     </p>
 </body>
 </html>
