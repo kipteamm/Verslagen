@@ -137,7 +137,7 @@
 
     <b>X:</b> (<u>A</u> &middot; <u>B</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u> &middot; C) + (A &middot; <u>B</u> &middot; <u>C</u>)
     <details>
-        <summary>= (<u>A</u> &middot; <u>B</u>) + (<u>B</u> &middot; <u>C</u>)</summary>
+        <summary>= <u>B</u> &middot; (<u>A</u> + <u>C</u>)</summary>
 
         <ul>
             <li>
@@ -163,16 +163,12 @@
                 = <u>B</u> &middot; (<u>A</u> + <u>C</u>)<br>
                 <note>(Absorption law)</note>
             </li>
-            <li>
-                = (<u>A</u> &middot; <u>B</u>) + (<u>B</u> &middot; <u>C</u>)<br>
-                <note>(Distribution)</note>
-            </li>
         </ul>
     </details>
     
     <b>Y:</b> (<u>A</u> &middot; <u>B</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u> &middot; C) + (<u>A</u> &middot; B &middot; <u>C</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)
     <details>
-        <summary>= (<u>A</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u>) + (<u>B</u> &middot; <u>C</u>)</summary>
+        <summary>= (<u>A</u> &middot; <u>C</u>) + (<u>B</u>) &middot; (<u>A</u> + <u>C</u>)</summary>
         <ul>
             <li>
                 <b>Y:</b> (<u>A</u> &middot; <u>B</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u> &middot; C) + (<u>A</u> &middot; B &middot; <u>C</u>) + (A &middot; <u>B</u> &middot; <u>C</u>)
@@ -206,18 +202,14 @@
                 <note>(Distributive law)</note>
             </li>
             <li>
-                = (<u>A</u> &middot; <u>C</u>) + (<u>B</u>) &middot; (<u>A</u> &middot; <u>C</u>)<br>
+                = (<u>A</u> &middot; <u>C</u>) + (<u>B</u>) &middot; (<u>A</u> + <u>C</u>)<br>
                 <note>(Absorption law)</note>
-            </li>
-            <li>
-                = (<u>A</u> &middot; <u>C</u>) + (<u>A</u> &middot; <u>B</u>) + (<u>B</u> &middot; <u>C</u>)<br>
-                <note>(Distributive law)</note>
             </li>
         </ul>
     </details>
 
     <p>
-        We zien dan dat we voor bijde expressies eenzelfde (<u>A</u> &middot; <u>B</u>) en (<u>B</u> &middot; <u>C</u>) bekomen. Dan is er ook nog een overige (<u>A</u> &middot; <u>C</u>).
+        We zien dan dat we voor bijde expressies eenzelfde (<u>B</u>) &middot; (<u>A</u> + <u>C</u>) bekomen. Dan is er ook nog een overige (<u>A</u> &middot; <u>C</u>).
     </p>
 
     <div style="text-align:center;">
@@ -260,7 +252,7 @@
         </li>
     </ul>
     <p>
-        Dit kunnen we eerst nog versimpelen voordat we 8 AND gates en 7 OR gates in logisim toevoegen. 
+        Dit kunnen we eerst nog versimpelen voordat we 36 AND gates en 29 OR gates in logisim toevoegen. 
         We kunnen uit deze formules 8 verschillende AND gates halen (die aangeven welk decimaal getal de binaire getallen representeren), en 7 OR gates (voor elk segment).
         Verder kun je ook nog het aantal NOT gates minimaliseren door voor elke input, ook een inverse lijn te trekken.
     </p>
