@@ -61,13 +61,171 @@
 
     <h3>Numeric Addition</h3>
     <p>
-        De “numeric addition”, met als ALU-operatie 0000 neemt twee 12-bit 
+        De "numeric addition", met als ALU-operatie 0000 neemt twee 12-bit 
         inputs en berekent de som gebruik makend van de 12-bit carry-lookahead 
         adder van opdracht 2.
     </p>
 
     <div style="text-align:center;">
-        <img src="afbeelding.png" alt="afbeelding"/>
+        <img src="numeric_addition.png" alt="Numeric addition"/>
     </div>
+
+    <h3>Numeric Subtraction</h3>
+    <p>
+        De "numeric subtraction", met als ALU-operatie 0001 maakt opnieuw 
+        gebruik van onze adder. Wat we eigenlijk doen is een som van een 
+        positief en een negatief getal (en niet echt aftrekken). We behouden 
+        A zoals deze is, maar nemen de numeric inverse van B. Vervolgens tellen
+        we A en <u>B</u> bij elkaar op. Hierbij wordt de initiele Carry op 1 
+        gezet. Dit doen we omdat voor eender welk positief binair getal, zijn 
+        negatieve equivalent gelijk is aan zijn inverse + 1. De inverse hadden 
+        we al (<u>B</u>), we moesten enkel nog 1 erbij optellen. Dat doen we
+        met de initiele Carry.
+    </p>
+    
+    <div style="text-align:center;">
+        <img src="numeric_subtraction.png" alt="Numeric subtraction"/>
+    </div>
+
+    <h3>AND</h3>
+    <p>
+        De "and", met als ALU-operatie 0010, werkt met een AND-gate die de 
+        12-bit A en B als inputs heeft en hiervan de logische AND als resultaat
+        geeft. 
+    </p>
+
+    <div style="text-align:center;">
+        <img src="and.png" alt="Numeric subtraction"/>
+    </div>
+
+    <h3>OR</h3>
+    <p>
+        De "and", met als ALU-operatie 0011, werkt met een OR-gate die de 
+        12-bit A en B als inputs heeft en hiervan de logische OR als resultaat
+        geeft. 
+    </p>
+
+    <div style="text-align:center;">
+        <img src="and.png" alt="Numeric subtraction"/>
+    </div>
+
+    <h3>Less Than</h3>
+    <p>
+        De "less than", met als ALU-operatie 0100, maakt gebruik van de 
+        "numeric substraction". We nemen het verschil van A en B. Als het 
+        resultaat positief is, weten we dat A groter is dan B. Als A min B 
+        negatief is, weten we dat A kleiner is dan B. Om te bepalen of het 
+        resultaat positief of negatief is, kijken we naar de Most Significant
+        Bit. Als dit 1 is spreken we van een negatief getal, anders is het
+        positief. We mogen wel niet alleen afgaan op deze Most Significante 
+        Bit. Er bestaat de mogelijkheid dat bij de subtractie er een overflow
+        is. Met de overflow moet er ook rekening worden gehouden.
+    </p>
+
+    <div style="text-align:center;">
+        <img src="less_than.png" alt="Less than"/>
+    </div>
+
+    <h3>Greater Than</h3>
+    <p>
+        De "greater than", met als ALU-operatie 0101, is op gelijkaardige wijze
+        opgesteld als de "less than". maar we nemen nu het inverse van de sing bit. Dit zorgde op eerste zicht voor een probleem omdat we de gevallen waar A en B gelijk waren aan elkaar ook inverteren wat niet de bedoeling was. Dus voegden we een extra and-gate die als ene input de inverse van de sing bit had en als tweede input het inverse van de “equal” zodat we de sing bit niet doorlieten wanneer A en B gelijk waren aan elkaar. 
+    </p>
+
+    <div style="text-align:center;">
+        <img src="greater_than.png" alt="Greater than"/>
+    </div>
+
+    <h3>Equals</h3>
+    <p>
+        De "equals", met als ALU-operatie 0110, vergelijkt A en B en geeft 1 als deze gelijk zijn anders geeft hij 0. Dit doen we met behulp van 12 and-gates en een or-gate. 
+    </p>
+
+    <div style="text-align:center;">
+        <img src="equals.png" alt="Equals"/>
+    </div>
+
+    <h3>Not Equals</h3>
+    <p>
+        De "not equals", met als ALU-operatie 0111, is de inverse van de equals
+        operatie.
+    </p>
+
+    <div style="text-align:center;">
+        <img src="not_equals.png" alt="Not equals"/>
+    </div>
+
+    <h3>Not</h3>
+    <p>
+        De "not", met als ALU-operatie 1000, neemt de logische NOT van de input
+        A.
+    </p>
+
+    <div style="text-align:center;">
+        <img src="not.png" alt="Not"/>
+    </div>
+
+    <h3>Numeric Inverse</h3>
+    <p>
+        De "numeric inverse", met als ALU-operatie 1001, maakt gebruik van onze
+        adder. Door het inverse van A te nemen en dit op te tellen met 1, krijgen we de numeric inverse van A. 
+        A.
+    </p>
+
+    <div style="text-align:center;">
+        <img src="numeric_inverse.png" alt="Numeric inverse"/>
+    </div>
+
+    <h3>Shift Left Logical</h3>
+    <p>
+        De "shift left logical", met als ALU-operatie 1010, zorgt er voor dat elke bit 1 plaats naar links verschuift. Op de least significant bit komt er dan een nul te staan. Dit doen we met behulp van splitters.
+    </p>
+
+    <div style="text-align:center;">
+        <img src="shift_left_logical.png" alt="Shift left logical"/>
+    </div>
+
+    <h3>Shift Right Logical</h3>
+    <p>
+        De "shift right logical", met als ALU-operatie 1011, zorgt er voor dat elke bit met 1 plaats naar rechts worden geschoven. Op de most significant bit komt er dan een nul te staan. Dit doen we met behulp van splitters.
+    </p>
+
+    <div style="text-align:center;">
+        <img src="shift_right_logical.png" alt="Shift right logical"/>
+    </div>
+
+    <h3>Shift Left Arithmetic</h3>
+    <p>
+        De "shift left arithmetic", met als ALU-operatie 1100, zorgt er voor dat elke bit met 1 plaats naar links verschuift en op de least significant bit komt er een 0. We controleren overflow door de 11de en de 10de bit met elkaar te vergelijken, als deze verschillend zijn zal er overflow zijn. 
+    </p>
+
+    <div style="text-align:center;">
+        <img src="shift_left_arithmetic.png" alt="Shift right arithmetic"/>
+    </div>
+
+    <h3>Shift Right Arithmetic</h3>
+    <p>
+        De "shift right arithmetic", met als ALU-operatie 1101, zorgt er voor dat elke bit met 1 plaats naar rechts verschuift en op de most significant bit komt dan weer de 11de bit van ervoor. Dit veroorzaakt ook dat er geen overflow geproduceerd kan worden. 
+    </p>
+
+    <div style="text-align:center;">
+        <img src="shift_right_logical.png" alt="Shift right logical"/>
+    </div>
+
+    <h3>Generate 0</h3>
+    <p>
+        De "generate 0", met als ALU-operatie 1110, genereert een 12-bit 
+        resultaat dat 0 is.
+    </p>
+
+    <h3>No Operation</h3>
+    <p>
+        De "no operation", met als ALU-operatie 1111, geeft gewoon input A als 
+        resltaat.
+    </p>
+
+    <footer>
+        &#169; 2024 Etienne El Hachem en Torben Petre&#769;.
+    </footer>
 </body>
 </html>
