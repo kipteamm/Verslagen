@@ -78,6 +78,30 @@
         <img src="images/program_counter.png" alt="Program counter"/>
     </div>
 
+    <h2>Decoder</h2>
+    <p>
+        De input van deze decoder is een instructie, dit is de instructie die
+        op dit moment uitgevoerd moet worden. We decoderen deze 16-bit 
+        instructie met behulp van splitters. We start bij de Most Significant
+        Bit en werken zo onze weg naar de Least Significant Bit. De eerste 3 
+        bits de we dan tegenkomen zijn de <i>operation code</i>. De volgende 9
+        bits zijn de rd, rs en rt elk bestaande uit 3 bits. De laaste 4 bits 
+        zijn de <i>function code</i>.
+    </p>
+
+    <p>
+        De decoder bepaalt ook de immediate die voor bepaalde operaties 
+        relevant is. Niet elke immediate werkt hetzelfde, we moeten rekening
+        houden met signed of unsigned, arithmetic or memory immediate. Ook kan
+        de immediate maximaal uit 9 bits bestaan terwijl het datapath 12-bits 
+        is. Het is dus ook van belang dat 9 bits naar 12 uitbreiden waarbij er
+        rekening wordt gehouden met het teken.
+    </p>
+
+    <div style="text-align:center;">
+        <img src="images/decoder.png" alt="Decoder"/>
+    </div>
+
     <footer>
         &#169; 2024 Etienne El Hachem en Torben Petre&#769;.
     </footer>
