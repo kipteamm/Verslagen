@@ -14,6 +14,7 @@
         note {font-size:14px;color: #464646;}
         span {text-wrap:nowrap;}
         summary {margin:10px 0px;cursor:pointer;}
+        code {background-color:#e4e4e4;font-size:14px;padding:2px 5px;border-radius:5px;}
     </style>
 </head>
 <body>
@@ -85,6 +86,24 @@
     </div>
 
     <h2>Counter</h2>
+    <p>
+        De counter maakt gebruik van een register uit de eerste opdracht en de
+        12-bit CLA uit opdracht 2. De adder heeft als inputs de output van het
+        register en een <code>0000 0000 0001</code>. De uitkomst is dus telkens
+        wat er in het register zit + 1. Je kunt dit ook berijken door de tweede
+        input op 0 te zetten en de CarryIn op 1.
+    </p>
+
+    <p>
+        De outkomst van deze adder wordt dan terug in het register gestoken die
+        altijd zal writen op falling edge (door een constante 1).
+    </p>
+
+    <p>
+        Verder is er nog een 12-bit input <b>Reset match</b>. Wanneer de
+        uitkomst groter of gelijk is aan deze waarde, zal het register gereset
+        worden.
+    </p>
     <div style="text-align:center;">
         <img src="images/counter.png" alt="Counter"/>
     </div>
