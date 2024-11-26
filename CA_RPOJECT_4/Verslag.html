@@ -53,11 +53,33 @@
     </ul>
 
     <h2>12-bit register</h2>
+    <p>
+        In onze 12-bit register wordt de 12-bit data <b>d</b> input gesplit. 
+        Wanneer write aanstaat en de clock op falling edge is, zal elke bit 
+        individueel in een D Flip-Flop gestoken worden.
+    </p>
+    <p>
+        De 12-bit output <b>q</b> zal de outputs van all D Flip-Flops weer
+        achter elkaar plakken tot een 12-bit getal.
+    </p>
     <div style="text-align:center;">
         <img src="images/register.png" alt="Register"/>
     </div>
 
     <h2>Register file</h2>
+    <p>
+        Voor deze opdracht hebben we onze 12-bit registers uit de vorige 
+        opdracht hergebruikt. Er is een <b>rs</b> en <b>rt</b> die een 3-bit
+        input nemen. Hiermee kan er verwezen worden naar 1 van de 8 
+        registers in de register file. Doormiddel van een multiplexor zullen de
+        waarden van de geselecteerde inputs doorgegeven worden naar de outputs 
+        <b>rs</b> en <b>rt</b> respectivelijk.
+    </p>
+    <p>
+        Er is ook een 3-bit input <b>rd</b> die aangeeft naar welk register in
+        de register file geschreven zal worden. Er wordt geschreven op 
+        falling-edge en wanneer write op 1 staat.
+    </p>
     <div style="text-align:center;">
         <img src="images/register_file.png" alt="Register file"/>
     </div>
