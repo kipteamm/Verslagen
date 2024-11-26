@@ -1,0 +1,85 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-15">
+
+    <title>Datapath 1 - Torben Petre&#769; en Etienne El Hachem</title>
+    <style type="text/css">
+        * {box-sizing:border-box;}
+        body {font-family:"Verdana";font-size:16px;padding:25px;max-width:800px;margin:0 auto;}
+        h1 {margin-top:25vh;}
+        u {text-decoration: overline;}
+        img {padding:12.5px;max-width: 100%;max-height:80vh;}
+        footer {margin-top:10vh;text-align:center;font-size:15px;}
+        li {margin-bottom:5px;}
+        note {font-size:14px;color: #464646;}
+        span {text-wrap:nowrap;}
+        summary {margin:10px 0px;cursor:pointer;}
+        code {background-color:#e4e4e4;font-size:14px;padding:2px 5px;border-radius:5px;}
+    </style>
+</head>
+<body>
+    <h1>Verslag</h1>
+    <p>
+        <b>Titel:</b> <i>Project 1: Datapath 1</i>
+    </p>
+    <p>
+        Dit verslag werd opgesteld door:
+    </p>
+    <ul>
+        <li>
+            <b>Naam:</b> <i>Etienne El Hachem</i><br>
+            <b>Studentennummer:</b> <i>20241443</i><br>
+            <b>Email adres:</b> <i>etienne.elhachem@student.uantwerpen.be</i>
+        </li>
+        <li>
+            <b>Naam:</b> <i>Torben Petre&#769;</i><br>
+            <b>Studentennummer:</b> <i>20241699</i><br>
+            <b>Email adres:</b> <i>torben.petre@student.uantwerpen.be</i>
+        </li>
+    </ul>
+    <b>Aantal man-uren besteed:</b> <i>x uur</i><br>
+    <b>Moeilijkheidsgraad:</b> <i>xx</i> /10 (1 is heel makkelijk, 10 is heel moeilijk)<p></p>
+
+    <h2>Inhoud van de oplossing</h2>
+    <p>
+        De oplossing bestaat uit de volgende bestanden (geef alle bestanden op):
+    </p>
+    <ul>
+        <li>
+            <a href="./bestand.ext" target="_blank">bestand1.ext</a>: toelichting van bestand1.ext
+        </li>
+        <li>
+            <a href="./bestand.ext" target="_blank">bestand2.ext</a>: toelichting van bestand2.ext
+        </li>
+    </ul>
+
+    <h2>12-bit program counter (PC)</h2>
+    <p>
+        In onze PC gebruiken we de volgende componenten: 12-bit Register van 
+        opdracht 4 en de 12-bit Carry Lookahead adder van de opdracht 2. De
+        werking van dit circuit is als volgt. Bij elke clock cyclus gaat het
+        instructie address met 1 omhoog (door middel van plus 1 met de CLA).
+        Het resultaat hiervaan wordt dan in een register opgeslagen.
+    </p>
+
+    <p>
+        Voor branch Relative en Branch Absulte hebben we wat extra logica 
+        moeten toevoegen. We nemen de logische AND van de branch Relative input
+        met de NOT van de branch Absolute input. Als dit 1 opleverd, laten we
+        de branch Relative. Als dit 0 opleverd laten we de brach Absolute door.
+    </p>
+
+    <p>
+        We doen ook nog een extra controle die voorkomt dat zowel branch 
+        Relative als branch Absolute aanstaat.
+    </p>
+
+    <div style="text-align:center;">
+        <img src="images/program_counter.png" alt="Program counter"/>
+    </div>
+
+    <footer>
+        &#169; 2024 Etienne El Hachem en Torben Petre&#769;.
+    </footer>
+</body>
+</html>
