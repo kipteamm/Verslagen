@@ -109,7 +109,26 @@
     </div>
 
     <h2>Finite state machine</h2>
+    <p>
+        Voor deze opdracht gebruiken we de counter uit de vorige vraag. We 
+        zullen als reset waarde 28 nemen waarna de counter terug op 0 zal 
+        springen. Dit omdat de stoplichten cycli niet verder dan 28 ticks gaan.
+        De counter zal optellen op elke falling edge. We zullen de output van
+        de counter telkens vergelijken met een reeks getallen.
+    </p>
+    <p>
+        Voor het eerste stoplicht zullen we kijken of de counter kleiner is dan
+        8 voor een groen licht. Kleiner dan 12 en groter of gelijk aan 8 voor
+        een geel licht. Als de counter een andere waarde heeft, zetten we het
+        licht op rood. 
+    </p>
+    <p>
+        Voor het tweede stoplicht moesten we iets meer voorwaarden in rekening
+        nemen. Maar ook voor dit stoplicht bepalen de ranges waartussen de 
+        counter waarde kunnel liggen, de kleur van het stoplicht. 
+    </p>
     <div style="text-align:center;">
+        <img src="images/traffic_lights.png" alt="Traffic lights"/>
         <img src="images/finite_state_machine.png" alt="Finite state machine"/>
     </div>
 
