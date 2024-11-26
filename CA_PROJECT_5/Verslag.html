@@ -46,10 +46,19 @@
     </p>
     <ul>
         <li>
-            <a href="./bestand.ext" target="_blank">bestand1.ext</a>: toelichting van bestand1.ext
+            <a href="./12-bit ALU.circ" target="_blank">12-bit ALU.circ</a>: bestand met ALU.
         </li>
         <li>
-            <a href="./bestand.ext" target="_blank">bestand2.ext</a>: toelichting van bestand2.ext
+            <a href="./ALU_Group31.circ" target="_blank">ALU_Group31</a>: bestand met ALU.
+        </li>
+        <li>
+            <a href="./12-bit_lookahead_adder.circ" target="_blank">12-bit_lookahead_adder.circ</a>: 12-bit CLA voor counter
+        </li>
+        <li>
+            <a href="./Register.circ" target="_blank">Register.circ</a>: bestand met register en register file.
+        </li>
+        <li>
+            <a href="./SD_Group31.circ" target="_blank">Register.circ</a>: bestand met datapath6.
         </li>
     </ul>
 
@@ -102,7 +111,7 @@
         <img src="images/decoder.png" alt="Decoder"/>
     </div>
 
-    <h3>Controller</h3>
+    <h2>Controller</h2>
     <p>
         De controller neemt als inputs de operation en function code. Als 
         outputs heeft dit circuit "ALU-op", "RD?", "ldi", "lui", "lw", "sw", 
@@ -117,6 +126,16 @@
 
     <div style="text-align:center;">
         <img src="images/controller.png" alt="Controller"/>
+    </div>
+
+    <h2>Geheel</h2>
+    <p>
+        Wanneer we dan al deze componenten met elkaar verbinden krijgen we dan
+        een circuit dat een reeks instructies kan uitvoeren en opslaan.
+    </p>
+
+    <div style="text-align:center;">
+        <img src="images/datapath.png" alt="Datapath"/>
     </div>
 
     <footer>
