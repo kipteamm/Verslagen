@@ -55,12 +55,12 @@
 
     <h2>12-bit register</h2>
     <p>
-        In onze 12-bit register wordt de 12-bit data <b>d</b> input gesplit. 
+        In ons 12-bit register wordt de 12-bit data <b>D</b> input gesplit. 
         Wanneer write aanstaat en de clock op falling edge is, zal elke bit 
         individueel in een D Flip-Flop gestoken worden.
     </p>
     <p>
-        De 12-bit output <b>q</b> zal de outputs van all D Flip-Flops weer
+        De 12-bit output <b>Q</b> zal de outputs van alle D Flip-Flops weer
         achter elkaar plakken tot een 12-bit getal.
     </p>
     <div style="text-align:center;">
@@ -87,16 +87,17 @@
 
     <h2>Counter</h2>
     <p>
-        De counter maakt gebruik van een register uit de eerste opdracht en de
-        12-bit CLA uit opdracht 2. De adder heeft als inputs de output van het
-        register en een <code>0000 0000 0001</code>. De uitkomst is dus telkens
-        wat er in het register zit + 1. Je kunt dit ook berijken door de tweede
+        De counter maakt gebruik van een register uit de eerste vraag en de
+        12-bit CLA uit opdracht 2 (<i>Adders</i>). De adder heeft als inputs de output van het
+        register en <code>0000 0000 0001</code>. De uitkomst is dus telkens
+        wat er in het register zit + 1. Je kunt dit ook bereiken door de tweede
         input op 0 te zetten en de CarryIn op 1.
     </p>
 
     <p>
-        De outkomst van deze adder wordt dan terug in het register gestoken die
-        altijd zal writen op falling edge (door een constante 1).
+        De uitkomst van deze adder wordt dan terug in het register gestoken die
+        altijd zal schrijven op falling edge. Dit is omdat write verbonden is
+        met een constante 1.
     </p>
 
     <p>
@@ -111,10 +112,10 @@
     <h2>Finite state machine</h2>
     <p>
         Voor deze opdracht gebruiken we de counter uit de vorige vraag. We 
-        zullen als reset waarde 28 nemen waarna de counter terug op 0 zal 
-        springen. Dit omdat de stoplichten cycli niet verder dan 28 ticks gaan.
-        De counter zal optellen op elke falling edge. We zullen de output van
-        de counter telkens vergelijken met een reeks getallen.
+        zullen als reset waarde 28 nemen waarop de counter terug op 0 zal 
+        springen. Dit omdat de stoplichten cycli 28 ticks gaan tellen (van 0
+        tot 27). De counter zal optellen op elke falling edge. We zullen de 
+        output van de counter telkens vergelijken met een reeks getallen.
     </p>
     <p>
         Voor het eerste stoplicht zullen we kijken of de counter kleiner is dan
@@ -124,8 +125,8 @@
     </p>
     <p>
         Voor het tweede stoplicht moesten we iets meer voorwaarden in rekening
-        nemen. Maar ook voor dit stoplicht bepalen de ranges waartussen de 
-        counter waarde kunnel liggen, de kleur van het stoplicht. 
+        nemen. Maar ook voor dit stoplicht bepalen ranges waartussen de counter
+        waarde kunnen liggen de kleur van het stoplicht. 
     </p>
     <div style="text-align:center;">
         <img src="images/traffic_lights.png" alt="Traffic lights"/>
@@ -134,15 +135,21 @@
 
     <h2>Stack</h2>
     <p>
-        Voor de stack gebruiken we opnieuw onze register. We register zal het 
+        Voor de stack gebruiken we opnieuw ons register. Het register zal het 
         adres van de top bijhouden. Hier zal bij een push 1 bij opgeteld worden
-        en bij een pop 1 van af getrokken. Verder wordt er gecontroleerd of de
-        input wel correct is. Als de push en pop aanstaan zal error aanspringen
-        of wanneer je een lege stack probeert te poppen. In het geval van een
-        error zal er niets veranderen aan het RAM geheugen of de register.
-        Enkel wanneer zowel push als pop uitstaan, zal de output de top waarde
-        weergeven. Ook in dit geval zal er niets veranderen aan het RAM
-        geheugen of de register.
+        en bij een pop 1 van afgetrokken.
+    </p>
+    <p>
+        Verder wordt er gecontroleerd of de input wel correct is. Als de push 
+        en pop aanstaan zal de error output aanspringen. Ook wanneer je een
+        lege stack probeert te poppen zal de error output aanspringen. In het 
+        geval van een error zal er niets veranderen aan het RAM-geheugen of het
+        register met de top.
+    </p>
+    <p>
+        Enkel wanneer zowel push als pop uitstaan, zal de output <b>Top</b> de 
+        top waarde weergeven. Ook in dit geval zal er niets veranderen aan het 
+        RAM-geheugen of het top register.
     </p>
     <div style="text-align:center;">
         <img src="images/stack.png" alt="Stack"/>
