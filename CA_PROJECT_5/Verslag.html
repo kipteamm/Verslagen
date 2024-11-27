@@ -20,7 +20,7 @@
 <body>
     <h1>Verslag</h1>
     <p>
-        <b>Titel:</b> <i>Project 1: Datapath 1</i>
+        <b>Titel:</b> <i>Project 5: Datapath 1</i>
     </p>
     <p>
         Dit verslag werd opgesteld door:
@@ -64,23 +64,22 @@
 
     <h2>12-bit program counter (PC)</h2>
     <p>
-        In onze PC gebruiken we de volgende componenten: het 12-bit Register
-        uit opdracht 4 en de 12-bit Carry Lookahead adder van de opdracht 2. De
-        werking van dit circuit is als volgt: bij elke clock cyclus gaat het
-        instructie address met 1 omhoog (door plus 1 met de CLA). Het resultaat
-        hiervaan wordt dan in het register opgeslagen.
+        In onze PC gebruiken we de volgende componenten: het 12-bit Register 
+        uit opdracht 4 en de 12-bit Carry Lookahead adder van opdracht 2. Bij
+        elke klokcyclus gaat het instructieadres met 1 omhoog door een som met
+        de CLA. Het resultaat wordt opgeslagen in het register.
     </p>
 
     <p>
-        Voor branch Relative en Branch Absulte hebben we wat extra logica 
-        moeten toevoegen. We nemen de logische AND van de branch Relative input
-        met de NOT van de branch Absolute input. Als dit 1 opleverd, laten we
-        de branch Relative. Als dit 0 opleverd laten we de brach Absolute door.
+        Voor branch Relative en Branch Absolute hebben we extra logica 
+        toegevoegd. We nemen de logische AND van de branch Relative input met
+        de NOT van de branch Absolute input. Dit bepaalt welke branch wordt 
+        doorgegeven.
     </p>
 
     <p>
         We doen ook nog een extra controle die voorkomt dat zowel branch 
-        Relative als branch Absolute aan kunnen staan.
+        Relative als branch Absolute kunnen aanstaan.
     </p>
 
     <div style="text-align:center;">
@@ -91,7 +90,7 @@
     <p>
         De input van deze decoder is een instructie, dit is de instructie die
         op dit moment uitgevoerd moet worden. De program counter bepaalt op 
-        welk adres deze instructie te vinden is waarnaa deze wordt doorgegeven
+        welk adres deze instructie te vinden is waarna deze wordt doorgegeven
         aan de decoder.
     </p>
 
@@ -99,8 +98,8 @@
         We decoderen deze 16-bit instructie met behulp van splitters. We lezen 
         van rechts naar links (Most Significant Bit naar Least Significant Bit)
         . De eerste reeks van 3 bits die we dan tegenkomen is de <i>operation
-        code</i>. De volgende 9 bits zijn de rd, rs en rt elk bestaande uit 3 
-        bits. De laaste 4 bits zijn de <i>function code</i>.
+        code</i>. De volgende 9 bits zijn de rd, rs en rt register adressen elk
+        bestaande uit 3 bits. De laaste 4 bits zijn de <i>function code</i>.
     </p>
 
     <p>
@@ -120,13 +119,12 @@
     <p>
         De controller neemt als inputs de operation en function code (bepaald
         door de decoder). Als outputs heeft dit circuit "ALU-op", "RD?", "ldi", 
-        "lui", "lw", "sw", "imm" en "imm for mem". We gebruiken een multiplexor 
-        om de ALU operatie te bepalen.
+        "lui", "lw", "sw", "imm" en "imm for mem". 
     </p>
 
     <p>
-        Verder gebruiken we nog een hele reeks comparatoren om de specificaties
-        voor verschillende instructie juist mee te geven.
+        We gebruiken een multiplexor om de ALU operatie te bepalen. Voor de
+        specifieke outputs ("RD?", "ldi", ...) gebruiken we een comparatoren.
     </p>
 
     <div style="text-align:center;">
