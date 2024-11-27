@@ -64,11 +64,11 @@
 
     <h2>12-bit program counter (PC)</h2>
     <p>
-        In onze PC gebruiken we de volgende componenten: 12-bit Register van 
-        opdracht 4 en de 12-bit Carry Lookahead adder van de opdracht 2. De
-        werking van dit circuit is als volgt. Bij elke clock cyclus gaat het
-        instructie address met 1 omhoog (door middel van plus 1 met de CLA).
-        Het resultaat hiervaan wordt dan in een register opgeslagen.
+        In onze PC gebruiken we de volgende componenten: het 12-bit Register
+        uit opdracht 4 en de 12-bit Carry Lookahead adder van de opdracht 2. De
+        werking van dit circuit is als volgt: bij elke clock cyclus gaat het
+        instructie address met 1 omhoog (door plus 1 met de CLA). Het resultaat
+        hiervaan wordt dan in het register opgeslagen.
     </p>
 
     <p>
@@ -80,7 +80,7 @@
 
     <p>
         We doen ook nog een extra controle die voorkomt dat zowel branch 
-        Relative als branch Absolute aanstaat.
+        Relative als branch Absolute aan kunnen staan.
     </p>
 
     <div style="text-align:center;">
@@ -90,21 +90,26 @@
     <h2>Decoder</h2>
     <p>
         De input van deze decoder is een instructie, dit is de instructie die
-        op dit moment uitgevoerd moet worden. We decoderen deze 16-bit 
-        instructie met behulp van splitters. We start bij de Most Significant
-        Bit en werken zo onze weg naar de Least Significant Bit. De eerste 3 
-        bits de we dan tegenkomen zijn de <i>operation code</i>. De volgende 9
-        bits zijn de rd, rs en rt elk bestaande uit 3 bits. De laaste 4 bits 
-        zijn de <i>function code</i>.
+        op dit moment uitgevoerd moet worden. De program counter bepaalt op 
+        welk adres deze instructie te vinden is waarnaa deze wordt doorgegeven
+        aan de decoder.
+    </p>
+
+    <p>
+        We decoderen deze 16-bit instructie met behulp van splitters. We lezen 
+        van rechts naar links (Most Significant Bit naar Least Significant Bit)
+        . De eerste reeks van 3 bits die we dan tegenkomen is de <i>operation
+        code</i>. De volgende 9 bits zijn de rd, rs en rt elk bestaande uit 3 
+        bits. De laaste 4 bits zijn de <i>function code</i>.
     </p>
 
     <p>
         De decoder bepaalt ook de immediate die voor bepaalde operaties 
         relevant is. Niet elke immediate werkt hetzelfde, we moeten rekening
-        houden met signed of unsigned, arithmetic or memory immediate. Ook kan
-        de immediate maximaal uit 9 bits bestaan terwijl het datapath 12-bits 
-        is. Het is dus ook van belang dat 9 bits naar 12 uitbreiden waarbij er
-        rekening wordt gehouden met het teken.
+        houden met signed of unsigned, arithmetic immediate of memory immediate
+        . De immediate zal maximaal uit 9 bits bestaan terwijl het datapath 12-
+        bits is. Aldus moeten we de 9 bits naar 12 uitbreiden waarbij er 
+        rekening moet worden gehouden met het teken.
     </p>
 
     <div style="text-align:center;">
@@ -113,10 +118,10 @@
 
     <h2>Controller</h2>
     <p>
-        De controller neemt als inputs de operation en function code. Als 
-        outputs heeft dit circuit "ALU-op", "RD?", "ldi", "lui", "lw", "sw", 
-        "imm" en "imm for mem". We gebruiken een multiplexor om de ALU operatie
-        te bepalen.
+        De controller neemt als inputs de operation en function code (bepaald
+        door de decoder). Als outputs heeft dit circuit "ALU-op", "RD?", "ldi", 
+        "lui", "lw", "sw", "imm" en "imm for mem". We gebruiken een multiplexor 
+        om de ALU operatie te bepalen.
     </p>
 
     <p>
@@ -130,8 +135,8 @@
 
     <h2>Geheel</h2>
     <p>
-        Wanneer we dan al deze componenten met elkaar verbinden krijgen we dan
-        een circuit dat een reeks instructies kan uitvoeren en opslaan.
+        Wanneer we dan al deze componenten met elkaar verbinden krijgen we een
+        circuit dat een reeks instructies kan uitvoeren en opslaan.
     </p>
 
     <div style="text-align:center;">
