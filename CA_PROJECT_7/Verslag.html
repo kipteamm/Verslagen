@@ -1,0 +1,158 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-15">
+
+    <title>CA_PROJECT_ - Torben Petre&#769; en Etienne El Hachem</title>
+    <style type="text/css">
+        * {box-sizing:border-box;}
+        body {font-family:"Verdana";font-size:16px;padding:25px;max-width:800px;margin:0 auto;}
+        h1 {margin-top:25vh;}
+        u {text-decoration: overline;}
+        img {padding:12.5px;max-width: 100%;max-height:80vh;}
+        footer {margin-top:10vh;text-align:center;font-size:15px;}
+        li {margin-bottom:5px;}
+        note {font-size:14px;color: #464646;}
+        span {text-wrap:nowrap;}
+        summary {margin:10px 0px;cursor:pointer;}
+        code,codeblock {font-family: monospace;background-color:#e4e4e4;font-size:14px;padding:2px 5px;border-radius:5px;}
+        codeblock {display: block;padding:10px 25px};
+    </style>
+</head>
+<body>
+    <h1>Verslag</h1>
+    <p>
+        <b>Titel:</b> <i>Project 7: Fibonacci</i>
+    </p>
+    <p>
+        Dit verslag werd opgesteld door:
+    </p>
+    <ul>
+        <li>
+            <b>Naam:</b> <i>Etienne El Hachem</i><br>
+            <b>Studentennummer:</b> <i>20241443</i><br>
+            <b>Email adres:</b> <i>etienne.elhachem@student.uantwerpen.be</i>
+        </li>
+        <li>
+            <b>Naam:</b> <i>Torben Petre&#769;</i><br>
+            <b>Studentennummer:</b> <i>20241699</i><br>
+            <b>Email adres:</b> <i>torben.petre@student.uantwerpen.be</i>
+        </li>
+    </ul>
+    <b>Aantal man-uren besteed:</b> <i>x uur</i><br>
+    <b>Moeilijkheidsgraad:</b> <i>xx</i> /10 (1 is heel makkelijk, 10 is heel moeilijk)<p></p>
+
+    <h2>Inhoud van de oplossing</h2>
+    <p>
+        De oplossing bestaat uit de volgende bestanden (geef alle bestanden op):
+    </p>
+    <ul>
+        <li>
+            <a href="./bestand.ext" target="_blank">bestand1.ext</a>: toelichting van bestand1.ext
+        </li>
+        <li>
+            <a href="./bestand.ext" target="_blank">bestand2.ext</a>: toelichting van bestand2.ext
+        </li>
+    </ul>
+
+    <h2>Exceptions</h2>
+    <p>
+        Om exceptions te detecteren hebben we een apart "exception controller"
+        toegevoegd. Dit circuit heeft 4 inputs, de operation code, rs, rt en de
+        function code. We gebruiken een demultiplexor om te bepalen welke 
+        controle er uit gevoerd moet worden.  
+    </p>
+
+    <ul>
+        <li>
+            Bij operation code (op-code) 000, controleren we of alle anders 
+            bits buiten de rd op 0 staan. Als dit niet zo is, is er een 
+            exception.
+        </li>
+        <li>
+            Bij operation code 001, controleren we of de Most Significant Bit
+            van de function code 0 is. Als dit niet zo is, is er een exception
+        </li>
+        <li>
+            Voor operation code 010, controleren we of de rt en de Most 
+            Significant Bit van de function gelijk zijn aan 0. Als dit zo is,
+            is er een exception.
+        </li>
+    </ul>
+
+    <div style="text-align:center;">
+        <img src="images/exception_controller.png" alt="Exception controller"/>
+    </div>
+
+    <p>
+        De output van de exception handler en de overflow van de ALU kunnen dan
+        het programmen stoppen door de halt aan te roepen.
+    </p>
+
+    <div style="text-align:center;">
+        <img src="images/halt.png" alt="Halt"/>
+    </div>
+
+    <h2>Fibonacci</h2>
+
+    <p>
+        Onze fibonacci code ziet er als volgt uit:
+    </p>
+
+    <codeblock>
+        LOADMEM<br>
+<br>
+        ldi r0 0<br>
+        sw r0 r7 0<br>
+        addi r7 1<br>
+        ldi r1 1<br>
+        sw r1 r7 0<br>
+        addi r7 1<br>
+        add r0 r0 r1<br>
+        sw r0 r7 0<br>
+        addi r7 1<br>
+        add r1 r0 r1<br>
+        sw r1 r7 0<br>
+        addi r7 1<br>
+        j 6<br>
+<br>
+        END
+    </codeblock>
+
+    <p>
+        We laden de eerste 2 fibonacci getallen (0, 1) in registers r0 en r1.
+        We schrijven deze ook al meteen naar het RAM geheugen door middel van
+        een <code>sw</code> instructie.
+    </p>
+    <p>
+        Voor elke <code>sw</code> instructie die we doen voegen we 1 toe aan r7
+        . Dit doen we om het volgende address in het RAM geheugen bij te houden
+        . De rest is een loop die telkens de twee voorgaande fibonacci getallen
+        optelt een naar het RAM geheugen schrijft.
+    </p>
+
+    <h2>Fibonacci programma testen</h2>
+    <p>
+        Om ons fibonacci programma te testen, laden we eerst 
+        <code>fibonacci.test1</code> in in het instruction memory. 
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(2, 1fr);">
+        <img style="margin:0 auto;" src="images/stap1.png" alt="Stap 1"/>
+        <img src="images/stap2.png" alt="Stap 2"/>
+    </div>
+
+    <p>
+        Vervolgens laat je het programma lopen door de click aan te zetten. 
+        Het programma zal stoppen nadat het het grootst mogelijke getal heeft
+        berekent tot dat de overflow een exception veroorzaakt.
+    </p>
+
+    <div style="text-align:center;">
+        <img src="images/stap3.png" alt="Stap 3"/>
+    </div>
+
+    <footer>
+        &#169; 2024 Etienne El Hachem en Torben Petre&#769;.
+    </footer>
+</body>
+</html>
