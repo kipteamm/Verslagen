@@ -71,16 +71,16 @@
 
     <h2>Exceptions</h2>
     <p>
-        Om exceptions te detecteren hebben we een apart "exception controller"
+        Om exceptions te detecteren hebben we een aparte "exception controller"
         toegevoegd. Dit circuit heeft 4 inputs, de operation code, rs, rt en de
         function code. We gebruiken een demultiplexor om te bepalen welke 
-        controle er uit gevoerd moet worden.  
+        controle er moet worden uitgevoerd.  
     </p>
 
     <ul>
         <li>
-            Bij operation code (op-code) 000, controleren we of alle anders 
-            bits buiten de rd op 0 staan. Als dit niet zo is, is er een 
+            Bij operation code (op-code) 000, controleren we of alle andere 
+            inputs (buiten de rd) op 0 staan. Als dit niet zo is, is er een 
             exception.
         </li>
         <li>
@@ -157,9 +157,10 @@
     </div>
 
     <p>
-        Vervolgens laat je het programma lopen door de click aan te zetten. 
-        Het programma zal stoppen nadat het het grootst mogelijke getal heeft
-        berekent tot dat de overflow een exception veroorzaakt.
+        Vervolgens laat je het programma lopen door de clock aan te zetten. 
+        Het programma zal stoppen wanneer het het grootst mogelijke getal heeft
+        bereikt. Dit is wanneer de optelling van de twee voorgaande getallen 
+        een overflow hebben.
     </p>
 
     <div style="text-align:center;">

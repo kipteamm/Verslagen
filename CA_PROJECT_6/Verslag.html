@@ -73,7 +73,7 @@
     <p>
         Voor het full datapath moesten we een paar kleine aanpassingen maken 
         aan onze program counter. Er werd een extra output toegevoegd die 1
-        toevoegd bij de momentele waarde van de program counter teruggeeft.
+        toevoegd bij de momentele waarde van de program counter.
     </p>
 
     <div style="text-align:center;">
@@ -84,7 +84,7 @@
     <p>
         De decoder heeft ook wat aanpassingen gekregen. Hier werd er een nieuwe
         output toegevoegd. Deze output bevat de immediate waarde voor de jump 
-        instructions.
+        instructies.
     </p>
 
     <div style="text-align:center;">
@@ -93,18 +93,18 @@
     
     <h2>Controller</h2>
     <p>
-        Aan de controller worden de "brnz", "j", "jal", "jr" instructies 
-        toegevoegd. De multiplexor die wordt gebruikt om de alu operatie te 
-        bepalen moet ook geupdate worden. Dit omdat de "brnz" en "jr" gebruik
+        Aan de controller worden de "brnz", "j", "jal" en "jr" instructies 
+        toegevoegd. De multiplexor die wordt gebruikt om de ALU operatie te 
+        bepalen moet ook veranderd worden. Dit omdat de "brnz" en "jr" gebruik
         maken van de addition component van de ALU.
     </p>
     <p>
-        Bestaande logica moest ook aangepast worden. De "rd" register output
-        moest aangepast worden omdat bij de "jr" instructie de waarde in dit
-        register van belang is.
+        Nog andere bestaande logica moest aangepast worden. De rd register 
+        output moest aangepast worden omdat bij de "jr" instructie de waarde in
+        dit register van belang is.
     </p>
     <p>
-        Er werd ook nog een extra output toegevoegd die aangaf of er naar de
+        Er werd ook nog een extra output toegevoegd die aangaf of er naar het
         register file geschreven mag worden. Dit is bijvoorbeeld niet het geval
         voor de instructies die we net toevoegden ("brnz", "j", "jal", "jr").
     </p>
