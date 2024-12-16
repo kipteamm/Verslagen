@@ -46,10 +46,19 @@
     </p>
     <ul>
         <li>
-            <a href="./bestand.ext" target="_blank">bestand1.ext</a>: toelichting van bestand1.ext
+            <a href="./12-bit ALU.circ" target="_blank">12-bit ALU.circ</a>: bestand met ALU.
         </li>
         <li>
-            <a href="./bestand.ext" target="_blank">bestand2.ext</a>: toelichting van bestand2.ext
+            <a href="./ALU_Group31.circ" target="_blank">ALU_Group31</a>: bestand met ALU.
+        </li>
+        <li>
+            <a href="./12-bit_lookahead_adder.circ" target="_blank">12-bit_lookahead_adder.circ</a>: 12-bit CLA voor counter
+        </li>
+        <li>
+            <a href="./Register.circ" target="_blank">Register.circ</a>: bestand met register en register file.
+        </li>
+        <li>
+            <a href="./FD_Group31.circ" target="_blank">Register.circ</a>: bestand met datapath6.
         </li>
     </ul>
 
@@ -89,6 +98,16 @@
         bepalen moet ook geupdate worden. Dit omdat de "brnz" en "jr" gebruik
         maken van de addition component van de ALU.
     </p>
+    <p>
+        Bestaande logica moest ook aangepast worden. De "rd" register output
+        moest aangepast worden omdat bij de "jr" instructie de waarde in dit
+        register van belang is.
+    </p>
+    <p>
+        Er werd ook nog een extra output toegevoegd die aangaf of er naar de
+        register file geschreven mag worden. Dit is bijvoorbeeld niet het geval
+        voor de instructies die we net toevoegden ("brnz", "j", "jal", "jr").
+    </p>
     
     <div style="text-align:center;">
         <img src="images/controller.png" alt="Controller"/>
@@ -97,7 +116,8 @@
     <h2>Geheel</h2>
     <p>
         Verder moet ook de manier waarop deze componenten samenwerken 
-        aangepast worden.
+        aangepast worden. Zo moeten de nieuwe instructies verbonden worden. We 
+        doen ook extra controles voor het bepalen van de juiste immediates.
     </p>
     
     <div style="text-align:center;">
